@@ -17,6 +17,11 @@
     <button id="btn-minify" title="Copy minified JSON">Copy minified</button>
     <button id="btn-expand" title="Expand all (small docs only)">Expand all</button>
     <button id="btn-collapse" title="Collapse to top level">Collapse</button>
+    <span class="pro-group">
+      <input id="query" type="text" placeholder="Query: data.items[*].name" autocomplete="off" />
+      <button id="btn-query" title="Run a JSONPath-style query (Pro)">Query ✦</button>
+      <button id="btn-csv" title="Export an array to CSV / Excel (Pro)">CSV ✦</button>
+    </span>
     <input id="search" type="search" placeholder="Search keys &amp; values…" autocomplete="off" />
     <span class="spacer"></span>
     <span id="status" class="status"></span>
@@ -35,6 +40,20 @@
   <div id="error" class="error" hidden></div>
   <main id="tree" class="tree-mount" aria-live="polite"></main>
   <div id="toast" class="toast" hidden></div>
+
+  <div id="unlock" class="modal" hidden>
+    <div class="modal-card">
+      <button id="unlock-close" class="modal-x" aria-label="Close">×</button>
+      <h2>Unlock Pro</h2>
+      <p>Query large JSON with JSONPath-style paths and export arrays to CSV / Excel. One-time <strong>$6</strong>, lifetime, runs in your browser.</p>
+      <a class="cta" id="buy" href="https://buy.stripe.com/8x24gBb7bfsmaHHb6Zbwk09" target="_blank" rel="noopener">Unlock Pro — $6 →</a>
+      <p class="small">Already purchased? Enter your code:</p>
+      <div class="code-row">
+        <input id="code" placeholder="JV-PRO-…" autocomplete="off" />
+        <button id="btn-code">Unlock</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="app.js"></script>
 </body>

@@ -1,6 +1,7 @@
 import {
   createTree, expandAll, collapseAll, searchData, expandPath, countNodes, valueType,
 } from "./render.js";
+import { isPro, tryUnlock, query as runQuery, toCSV } from "./pro.js";
 
 const $ = (id) => document.getElementById(id);
 const els = {
@@ -49,6 +50,17 @@ function wire() {
     clearTimeout(t);
     t = setTimeout(() => runSearch(els.search.value.trim()), 180);
   });
+
+  // Pro: JSONPath query + CSV export, gated behind a one-time unlock
+  $("btn-query").addEventListener("click", onQuery);
+  $("btn-csv").addEventListener("click", onCsv);
+  $("btn-code").addEventListener("click", () => {
+    if (tryUnlock($("code").value)) { closeUnlock(); reflectPro(); toast("Pro unlocked — thank you!"); }
+    else toast("That code didn't match — check your receipt page.");
+  });
+  $("unlock-close").addEventListener("click", closeUnlock);
+  $("unlock").addEventListener("click", (e) => { if (e.target.id === "unlock") closeUnlock(); });
+  reflectPro();
 }
 
 function loadText(text) {
@@ -164,4 +176,46 @@ function toast(text) {
   els.toast.hidden = false;
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { els.toast.hidden = true; }, 1800);
+}
+
+// --- Pro features ---
+function onQuery() {
+  if (!isPro()) { openUnlock(); return; }
+  if (current == null) { toast("Format some JSON first."); return; }
+  const expr = $("query").value.trim();
+  if (!expr) { toast("Type a path, e.g. data.items[*].name"); return; }
+  let result;
+  try { result = runQuery(current, expr); }
+  catch (e) { toast("Query error: " + e.message); return; }
+  current = result; // search / CSV / copy now apply to the result; Format restores the original
+  renderTree(result);
+  els.search.value = "";
+  toast("Showing query result · click Format to reset");
+}
+
+function onCsv() {
+  if (!isPro()) { openUnlock(); return; }
+  if (current == null) { toast("Format some JSON first."); return; }
+  download("data.csv", toCSV(current), "text/csv;charset=utf-8");
+  toast("CSV exported");
+}
+
+function download(name, text, type) {
+  const blob = new Blob([text], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function openUnlock() { $("unlock").hidden = false; }
+function closeUnlock() { $("unlock").hidden = true; }
+
+function reflectPro() {
+  if (!isPro()) return;
+  $("btn-query").textContent = "Query";
+  $("btn-csv").textContent = "CSV";
+  $("btn-query").title = "Run a JSONPath-style query";
+  $("btn-csv").title = "Export an array to CSV / Excel";
 }

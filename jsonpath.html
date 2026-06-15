@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSONPath Tester — Evaluate JSONPath Online, Free &amp; Private</title>
+  <meta name="description" content="Test JSONPath expressions against your JSON online. Paste JSON, type a path like data.items[*].name, and see the result instantly. Runs in your browser." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/jsonpath.html" />
+  <link rel="stylesheet" href="viewer.css" />
+  <style>
+    body { display: block; height: auto; padding: 0; }
+    .page { max-width: 900px; margin: 0 auto; padding: 18px 20px 60px; }
+    .logo { color: var(--accent); text-decoration: none; font-weight: 700; font-family: system-ui, sans-serif; }
+    h1 { font-family: system-ui, sans-serif; font-size: 28px; margin: 16px 0 6px; }
+    .sub { font-family: system-ui, sans-serif; color: var(--muted); margin: 0 0 18px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    label { font-family: system-ui, sans-serif; font-size: 13px; color: var(--muted); display: block; margin-bottom: 5px; }
+    #in { width: 100%; height: 200px; font: 13px/1.5 var(--mono); padding: 11px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg); color: var(--fg); resize: vertical; }
+    .pathrow { display: flex; gap: 8px; }
+    #path { flex: 1; font: 13px/1.5 var(--mono); padding: 9px 11px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--fg); }
+    #run { font: inherit; font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; padding: 9px 18px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+    .result { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; min-height: 80px; overflow: auto; max-height: 420px; }
+    .err { color: #c0341a; font-family: var(--mono); font-size: 13px; }
+    .prose { font-family: system-ui, sans-serif; margin-top: 30px; color: var(--fg); }
+    .prose h2 { font-size: 19px; } .prose code { background: var(--row-hover); padding: 1px 6px; border-radius: 5px; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="logo" href="./">{ } JSON Viewer</a>
+    <h1>JSONPath Tester</h1>
+    <p class="sub">Paste JSON, type a path, and see exactly what it matches. Supports <code>.key</code>, <code>[index]</code>, and <code>[*]</code> wildcards. Everything runs in your browser.</p>
+    <div class="grid">
+      <div>
+        <label for="in">JSON</label>
+        <textarea id="in" spellcheck="false" placeholder='{"data":{"items":[{"name":"ada"},{"name":"alan"}]}}'></textarea>
+      </div>
+      <div>
+        <label for="path">Path</label>
+        <div class="pathrow">
+          <input id="path" placeholder="data.items[*].name" autocomplete="off" />
+          <button id="run">Evaluate</button>
+        </div>
+      </div>
+      <div>
+        <label>Result</label>
+        <div id="err" class="err" hidden></div>
+        <div id="out" class="result"></div>
+      </div>
+    </div>
+    <div class="prose">
+      <h2>Path syntax</h2>
+      <p><code>store.book[0].title</code> — keys and array indexes. <code>users[*].email</code> — <code>[*]</code> maps over every element of an array (or every value of an object). Leading <code>$</code> is optional.</p>
+      <h2>Exploring large JSON?</h2>
+      <p>Open the full <a href="app.html">JSON viewer</a> for a fast collapsible tree, search, and CSV export on big files.</p>
+    </div>
+  </div>
+  <script type="module" src="jsonpath.js"></script>
+</body>
+</html>

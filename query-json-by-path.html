@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Query JSON by Path (JSONPath Basics &amp; Examples)</title>
+  <meta name="description" content="Pull values out of JSON with simple path expressions: dot keys, array indexes, and wildcards. Practical JSONPath examples you can paste and try." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/query-json-by-path.html" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22}}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:720px;margin:0 auto;padding:0 20px 60px}header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;line-height:1.2;margin:18px 0 8px}h2{font-size:21px;margin:28px 0 8px}
+    code{background:var(--soft);padding:2px 6px;border-radius:5px;font-size:15px}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:14px}
+    table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}td,th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--border)}
+    a{color:var(--accent)}.tip{background:var(--soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0}
+    .muted{color:var(--muted)}footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>How to query JSON by path</h1>
+    <p class="muted">Most of the time you don't need the whole JSON document — you need one field, or the same field across a list. Path expressions let you pull exactly that. Here are the practical patterns and examples you can paste and try.</p>
+
+    <h2>The three patterns you'll use most</h2>
+    <table>
+      <tr><th>Pattern</th><th>Means</th></tr>
+      <tr><td><code>.key</code> or <code>key</code></td><td>Step into an object's property</td></tr>
+      <tr><td><code>[0]</code></td><td>The element at an array index</td></tr>
+      <tr><td><code>[*]</code></td><td>Every element of an array (or every value of an object)</td></tr>
+    </table>
+
+    <h2>Examples</h2>
+    <p>Given this JSON:</p>
+    <pre>{
+  "store": "Aurora",
+  "orders": [
+    { "id": 1, "total": 18.0, "items": ["espresso"] },
+    { "id": 2, "total": 32.5, "items": ["cold brew", "mug"] }
+  ]
+}</pre>
+    <table>
+      <tr><th>Path</th><th>Result</th></tr>
+      <tr><td><code>store</code></td><td><code>"Aurora"</code></td></tr>
+      <tr><td><code>orders[0].total</code></td><td><code>18</code></td></tr>
+      <tr><td><code>orders[*].id</code></td><td><code>[1, 2]</code></td></tr>
+      <tr><td><code>orders[*].items[*]</code></td><td><code>["espresso","cold brew","mug"]</code></td></tr>
+    </table>
+
+    <h2>Why this beats scrolling</h2>
+    <p>On a large response, hunting for a value by eye is slow and error-prone. A path expression returns just what you asked for, and combined with a viewer you can confirm the shape first, then extract.</p>
+
+    <div class="tip">
+      Try any of these live in the free <a href="jsonpath.html">JSONPath tester</a> — paste your JSON, type a path, see the result. For exploring big files first, open the <a href="app.html">JSON viewer</a>; to dump an array to a spreadsheet, use the <a href="json-to-csv.html">JSON&nbsp;→&nbsp;CSV converter</a>.
+    </div>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="./">More free JSON tools</a></footer>
+  </div>
+</body>
+</html>

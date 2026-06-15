@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON Formatter, Beautifier &amp; Minifier (Free, In-Browser)</title>
+  <meta name="description" content="Format, beautify, or minify JSON online for free. Paste JSON, choose indentation, copy the result. Runs in your browser — nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/format.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSON Formatter, Beautifier & Minifier" />
+  <meta property="og:description" content="Beautify or minify JSON instantly. Free, in your browser, nothing uploaded." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/format.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa;--mono:ui-monospace,Menlo,Consolas,monospace}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22}}
+    *{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:920px;margin:0 auto;padding:0 20px 60px}header{padding:16px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:28px;margin:14px 0 4px}.sub{color:var(--muted);margin:0 0 18px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:680px){.cols{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    textarea{width:100%;height:320px;font:13px/1.5 var(--mono);padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .bar{display:flex;gap:10px;align-items:center;margin:14px 0;flex-wrap:wrap}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    select{font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg)}
+    .err{margin:10px 0;padding:10px 12px;background:#ffebe9;color:#c0341a;border-radius:8px;font-family:var(--mono);font-size:13px}
+    @media(prefers-color-scheme:dark){.err{background:#3d1412;color:#ff9492}}
+    .prose{margin-top:28px}.prose h2{font-size:19px}a{color:var(--accent)}
+    footer{border-top:1px solid var(--border);margin-top:30px;padding-top:18px;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JSON Formatter, Beautifier &amp; Minifier</h1>
+    <p class="sub">Paste JSON and beautify it with your chosen indentation, or minify it to one line. Everything runs in your browser — nothing is uploaded.</p>
+    <div class="cols">
+      <div><label for="in">JSON</label><textarea id="in" spellcheck="false" placeholder='{"name":"ada","nums":[1,2,3]}'></textarea></div>
+      <div><label for="out">Result</label><textarea id="out" spellcheck="false" readonly></textarea></div>
+    </div>
+    <div class="bar">
+      <button class="primary" id="beautify">Beautify</button>
+      <button class="primary" id="minify">Minify</button>
+      <label style="display:flex;align-items:center;gap:6px;margin:0">Indent: <select id="indent"><option value="2">2 spaces</option><option value="4">4 spaces</option><option value="tab">Tab</option></select></label>
+      <button id="copy">Copy</button>
+    </div>
+    <div id="err" class="err" hidden></div>
+    <section class="prose">
+      <h2>Beautify vs minify</h2>
+      <p><strong>Beautify</strong> adds indentation and line breaks so JSON is easy to read. <strong>Minify</strong> strips all whitespace to make the smallest valid JSON for storage or transfer. Both validate your JSON first and report the exact error if it's invalid. To explore a large file as a tree, open the <a href="app.html">JSON viewer</a>.</p>
+    </section>
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="./">More free JSON tools</a></footer>
+  </div>
+  <script type="module" src="format.js"></script>
+</body>
+</html>

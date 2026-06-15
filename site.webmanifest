@@ -1,0 +1,21 @@
+{
+  "name": "JSON Viewer & Formatter",
+  "short_name": "JSON Viewer",
+  "description": "Open, format & explore JSON fast — even huge files. Private, in-browser.",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

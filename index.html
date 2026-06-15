@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON Viewer &amp; Formatter for Large Files — Free, Private, In-Browser</title>
+  <meta name="description" content="A free JSON viewer and formatter built to stay fast on large files. Collapsible tree, instant search, syntax highlighting — 100% in your browser, nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSON Viewer & Formatter for Large Files" />
+  <meta property="og:description" content="Open, format, and explore JSON fast — even huge files. Private and in-browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; } }
+    * { box-sizing: border-box; }
+    body { margin:0; font:17px/1.65 system-ui,-apple-system,Segoe UI,sans-serif; color:var(--fg); background:var(--bg); }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    header.site { padding: 22px 0; }
+    .logo { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 18px; }
+    .hero { padding: 56px 0 36px; }
+    h1 { font-size: 38px; line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.02em; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 0 26px; }
+    .cta { display:inline-block; background: var(--accent); color:#fff; text-decoration:none;
+      padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 16px; }
+    .cta.secondary { background: transparent; color: var(--accent); border: 1px solid var(--border); margin-left: 8px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 18px; margin: 40px 0; }
+    .card { background: var(--soft); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .card h3 { margin: 0 0 6px; font-size: 16px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    section.prose { margin: 36px 0; }
+    section.prose h2 { font-size: 22px; margin: 0 0 10px; }
+    section.prose p { color: var(--fg); }
+    footer { border-top: 1px solid var(--border); margin-top: 48px; padding: 24px 0 48px; color: var(--muted); font-size: 14px; }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site"><a class="logo" href="./">{ } JSON Viewer</a></header>
+
+    <div class="hero">
+      <h1>A JSON viewer that doesn't choke on large files.</h1>
+      <p class="sub">Open, format, and explore JSON in a fast collapsible tree with instant search — even when the file is huge. Everything runs in your browser. Nothing is uploaded.</p>
+      <a class="cta" href="app.html">Open the JSON viewer →</a>
+      <a class="cta secondary" href="app.html">Paste or open a file</a>
+    </div>
+
+    <div class="grid">
+      <div class="card"><h3>Built for big files</h3><p>The tree loads in chunks, so megabytes of JSON open instantly instead of freezing the page.</p></div>
+      <div class="card"><h3>Instant search</h3><p>Search across every key and value and jump straight to the matches, deep in the structure.</p></div>
+      <div class="card"><h3>Private by design</h3><p>All parsing happens locally in your browser. Your JSON is never sent to a server.</p></div>
+      <div class="card"><h3>Format &amp; copy</h3><p>Beautify or minify with one click, with syntax highlighting and collapsible nodes.</p></div>
+    </div>
+
+    <section class="prose">
+      <h2>Why another JSON viewer?</h2>
+      <p>Most online JSON tools were built for small snippets. Paste a few megabytes of API response or a large log export and they hang, crash the tab, or upload your data to a server you don't control. This one renders large documents incrementally and keeps everything on your machine, so you can actually read the file in front of you.</p>
+      <h2>What you can do</h2>
+      <p>Paste JSON or open a <code>.json</code> file, expand and collapse the tree, search keys and values, and copy the result pretty-printed or minified. No account, no ads, no sign-up.</p>
+    </section>
+
+    <footer class="wrap">
+      Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; A browser extension version is on the way.
+    </footer>
+  </div>
+</body>
+</html>

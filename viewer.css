@@ -1,0 +1,108 @@
+:root {
+  --bg: #ffffff; --fg: #1f2328; --muted: #656d76; --border: #d0d7de;
+  --row-hover: #f3f4f6; --match: #fff3bf; --match-border: #f0c000;
+  --key: #0a3069; --string: #0a7d33; --number: #6639ba; --boolean: #b35900;
+  --null: #8b949e; --summary: #656d76; --accent: #0969da;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117; --fg: #e6edf3; --muted: #8b949e; --border: #30363d;
+    --row-hover: #161b22; --match: #4d3f00; --match-border: #d4a200;
+    --key: #79c0ff; --string: #7ee787; --number: #d2a8ff; --boolean: #ffa657;
+    --null: #8b949e; --summary: #8b949e; --accent: #58a6ff;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 13px/1.5 var(--mono);
+  display: flex; flex-direction: column;
+}
+
+.toolbar {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 10px; background: var(--bg);
+  border-bottom: 1px solid var(--border); flex-wrap: wrap;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+}
+.brand { color: var(--accent); margin-right: 4px; }
+.toolbar button {
+  font: inherit; font-size: 12px; padding: 4px 9px; cursor: pointer;
+  background: var(--bg); color: var(--fg);
+  border: 1px solid var(--border); border-radius: 6px;
+}
+.toolbar button:hover { background: var(--row-hover); }
+#search, #url {
+  font: inherit; font-size: 12px; padding: 4px 9px;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--bg); color: var(--fg);
+}
+#search { min-width: 200px; }
+.spacer { flex: 1; }
+.status { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+.input-panel { padding: 12px; }
+.input-panel.hidden { display: none; }
+.hint { color: var(--muted); margin: 0 0 8px; font-family: system-ui, sans-serif; }
+kbd {
+  font: inherit; font-size: 11px; padding: 1px 5px;
+  border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px;
+}
+#input {
+  width: 100%; min-height: 220px; resize: vertical;
+  font: 13px/1.5 var(--mono); padding: 10px;
+  background: var(--bg); color: var(--fg);
+  border: 1px solid var(--border); border-radius: 8px;
+}
+.url-row { display: flex; gap: 6px; margin-top: 8px; }
+.url-row #url { flex: 1; }
+.url-row button {
+  font: inherit; font-size: 12px; padding: 4px 12px; cursor: pointer;
+  background: var(--bg); color: var(--fg);
+  border: 1px solid var(--border); border-radius: 6px;
+}
+
+.error {
+  margin: 10px 12px; padding: 10px 12px;
+  background: #ffebe9; color: #c0341a; border: 1px solid #ff818266; border-radius: 8px;
+  white-space: pre-wrap; font-family: var(--mono);
+}
+@media (prefers-color-scheme: dark) { .error { background: #3d1412; color: #ff9492; } }
+
+.tree-mount { flex: 1; overflow: auto; padding: 8px 12px 40px; }
+
+/* Tree */
+.jv-children { padding-left: 1.4em; }
+.jv-node > .jv-children { display: none; }
+.jv-node.jv-open > .jv-children { display: block; }
+.jv-row {
+  display: flex; align-items: baseline; gap: 0;
+  padding: 1px 4px; border-radius: 4px; white-space: pre;
+}
+.jv-clickable { cursor: pointer; }
+.jv-row:hover { background: var(--row-hover); }
+.jv-toggle {
+  display: inline-block; width: 1.1em; color: var(--muted);
+  user-select: none; font-size: 10px;
+}
+.jv-key { color: var(--key); }
+.jv-colon { color: var(--muted); }
+.jv-summary { color: var(--summary); font-style: italic; }
+.jv-val { white-space: pre-wrap; word-break: break-word; }
+.jv-string { color: var(--string); }
+.jv-number { color: var(--number); }
+.jv-boolean { color: var(--boolean); }
+.jv-null { color: var(--null); }
+.jv-row.jv-match { background: var(--match); box-shadow: inset 0 0 0 1px var(--match-border); }
+.jv-more { padding: 2px 4px 2px 1.5em; color: var(--accent); cursor: pointer; font-style: italic; }
+.jv-more:hover { text-decoration: underline; }
+
+.toast {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  background: #1f2328; color: #fff; padding: 8px 16px; border-radius: 8px;
+  font-family: system-ui, sans-serif; font-size: 13px; opacity: 0.96;
+}

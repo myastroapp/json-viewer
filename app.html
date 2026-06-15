@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON Viewer &amp; Formatter for Large Files — Free &amp; Private</title>
+  <meta name="description" content="Open, format, and explore JSON fast — even huge files. Collapsible tree, instant search, syntax highlighting. 100% in your browser; nothing is uploaded." />
+  <link rel="stylesheet" href="viewer.css" />
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="./" style="text-decoration:none">JSON Viewer</a>
+    <button id="btn-new" title="Start over / paste new JSON">New</button>
+    <button id="btn-open" title="Open a .json file">Open file</button>
+    <button id="btn-format" title="Parse &amp; render what's in the input box">Format</button>
+    <button id="btn-beautify" title="Copy pretty-printed JSON">Copy pretty</button>
+    <button id="btn-minify" title="Copy minified JSON">Copy minified</button>
+    <button id="btn-expand" title="Expand all (small docs only)">Expand all</button>
+    <button id="btn-collapse" title="Collapse to top level">Collapse</button>
+    <input id="search" type="search" placeholder="Search keys &amp; values…" autocomplete="off" />
+    <span class="spacer"></span>
+    <span id="status" class="status"></span>
+    <input id="file" type="file" accept=".json,application/json,text/plain" hidden />
+  </header>
+
+  <section id="input-panel" class="input-panel">
+    <p class="hint">Paste JSON below and hit <kbd>Format</kbd> (or <kbd>⌘/Ctrl</kbd>+<kbd>Enter</kbd>), or open a <code>.json</code> file. Everything runs in your browser — nothing is uploaded.</p>
+    <textarea id="input" spellcheck="false" placeholder='{ "paste": "your JSON here" }'></textarea>
+    <div class="url-row">
+      <input id="url" type="url" placeholder="…or fetch from a URL (https://…)" />
+      <button id="btn-fetch">Load URL</button>
+    </div>
+  </section>
+
+  <div id="error" class="error" hidden></div>
+  <main id="tree" class="tree-mount" aria-live="polite"></main>
+  <div id="toast" class="toast" hidden></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

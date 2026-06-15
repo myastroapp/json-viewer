@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Validate JSON (and Fix the Most Common Errors)</title>
+  <meta name="description" content="Validate JSON and fix the errors that break it — trailing commas, single quotes, unquoted keys, missing commas. Paste it and see the exact line and column." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/how-to-validate-json.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Validate JSON (and Fix Common Errors)" />
+  <meta property="og:description" content="Fix trailing commas, single quotes, unquoted keys, and missing commas — see the exact error location." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/how-to-validate-json.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa;--bad:#c0341a;--good:#0a7d33}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22;--bad:#ff9492;--good:#7ee787}}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:720px;margin:0 auto;padding:0 20px 60px}header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;line-height:1.2;margin:18px 0 8px}h2{font-size:20px;margin:26px 0 8px}
+    code{background:var(--soft);padding:2px 6px;border-radius:5px;font-size:15px}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:14px}
+    .bad{color:var(--bad)}.good{color:var(--good)}a{color:var(--accent)}
+    .tip{background:var(--soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0}
+    .muted{color:var(--muted)}footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>How to validate JSON (and fix common errors)</h1>
+    <p class="muted">Valid JSON follows a few strict rules. When parsing fails, it's almost always one of a handful of mistakes — here they are, with the fix.</p>
+
+    <h2>The usual culprits</h2>
+    <ul>
+      <li><strong>Trailing comma.</strong> <code class="bad">[1, 2, 3,]</code> → JSON allows no comma after the last item: <code class="good">[1, 2, 3]</code>.</li>
+      <li><strong>Single quotes.</strong> <code class="bad">{'a': 1}</code> → strings and keys must use double quotes: <code class="good">{"a": 1}</code>.</li>
+      <li><strong>Unquoted keys.</strong> <code class="bad">{a: 1}</code> → keys must be quoted: <code class="good">{"a": 1}</code>.</li>
+      <li><strong>Missing comma</strong> between items, or a comma where none belongs.</li>
+      <li><strong>Comments.</strong> JSON has none — remove <code>//</code> and <code>/* */</code>.</li>
+      <li><strong>Wrong/again unmatched brackets</strong> — every <code>{</code> needs a <code>}</code>, every <code>[</code> a <code>]</code>.</li>
+      <li><strong>Undefined / NaN / trailing text</strong> — only <code>true</code>, <code>false</code>, <code>null</code>, numbers, strings, arrays, objects are allowed.</li>
+    </ul>
+
+    <h2>The fastest way to find the error</h2>
+    <p>Rather than scan by eye, paste the JSON into a validator that points at the exact spot. The parser reports the position, so you jump straight to the broken line instead of hunting.</p>
+
+    <div class="tip">
+      Paste your JSON into the free <a href="app.html">JSON viewer</a> — if it's invalid, it shows the error message with the exact <strong>line and column</strong>; if it's valid, it renders as a clean, searchable tree. No upload, no sign-up.
+    </div>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="./">More free JSON tools</a></footer>
+  </div>
+</body>
+</html>

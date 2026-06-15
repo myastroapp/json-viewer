@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Open a Large JSON File (Without Crashing Your Browser or Editor)</title>
+  <meta name="description" content="Big JSON file freezing your editor or browser? Here are practical ways to open and read a large JSON file — command line (jq), splitting, and a browser viewer built for big files." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/how-to-open-large-json-files.html" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22}}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:720px;margin:0 auto;padding:0 20px 60px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;line-height:1.2;margin:18px 0 8px}h2{font-size:21px;margin:30px 0 8px}
+    code{background:var(--soft);padding:2px 6px;border-radius:5px;font-size:15px}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:14px}
+    a{color:var(--accent)}.tip{background:var(--soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:18px 0}
+    .muted{color:var(--muted)}footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>How to open a large JSON file without crashing your browser or editor</h1>
+    <p class="muted">A big JSON response or export — tens or hundreds of megabytes — will freeze most text editors, lock up a browser tab, or get truncated by online formatters. Here are practical ways to actually read it.</p>
+
+    <h2>1. Inspect it from the command line</h2>
+    <p>If you just need to peek at the structure or pull out part of it, the terminal is fastest because it streams instead of loading everything into a UI.</p>
+    <pre># pretty-print and page through it
+jq . big.json | less
+
+# see just the top-level keys
+jq 'keys' big.json
+
+# pull one slice (e.g. the first 5 items of an array)
+jq '.items[0:5]' big.json</pre>
+    <p><code>jq</code> handles large files well and lets you extract exactly what you need. <code>less</code> opens even multi-gigabyte files instantly because it doesn't read the whole thing at once.</p>
+
+    <h2>2. Split it into smaller pieces</h2>
+    <p>If the file is a giant array and you want chunks you can open normally:</p>
+    <pre># one object per line, then split into 10k-line files
+jq -c '.[]' big.json | split -l 10000 - chunk_</pre>
+
+    <h2>3. Open it in a viewer built for large files</h2>
+    <p>When you want to actually <em>browse</em> the data — expand and collapse the tree, search keys and values, jump around — most online JSON formatters fall over because they try to render the entire document into the page at once. A viewer that renders the tree <strong>incrementally</strong> (building each level only as you expand it) stays responsive even on very large files.</p>
+    <div class="tip">
+      The free <a href="app.html">JSON viewer on this site</a> is built exactly for this: it loads the tree in chunks, so multi-megabyte files open without freezing. It runs entirely in your browser — the file is never uploaded anywhere — and includes instant search across keys and values. Open it, paste the JSON or choose the file, and start exploring.
+    </div>
+
+    <h2>4. Extract or convert instead of opening the whole thing</h2>
+    <p>Often you don't need the entire file — you need a table or a subset. Two quick options:</p>
+    <ul>
+      <li>Turn an array of objects into a spreadsheet with the <a href="json-to-csv.html">JSON&nbsp;→&nbsp;CSV converter</a>.</li>
+      <li>Pull a specific path out with the <a href="jsonpath.html">JSONPath tester</a> (e.g. <code>data.items[*].id</code>).</li>
+    </ul>
+
+    <h2>Which should you use?</h2>
+    <p>For a quick look or scripted extraction, reach for <code>jq</code>. To read and navigate the data by hand, use a chunked browser viewer. To hand the data to a spreadsheet or another tool, convert the part you need. All three avoid the core problem: never force the whole file into a UI that wasn't built for it.</p>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="./">More free JSON tools</a></footer>
+  </div>
+</body>
+</html>

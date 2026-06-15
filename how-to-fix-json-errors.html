@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Fix Common JSON Errors ("Unexpected token", parse errors)</title>
+  <meta name="description" content="The most common JSON syntax errors and how to fix each one: trailing commas, single quotes, unquoted keys, comments, and 'Unexpected token' parse errors — with examples and a free validator." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/how-to-fix-json-errors.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Fix Common JSON Errors" />
+  <meta property="og:description" content="Trailing commas, single quotes, unquoted keys, comments, 'Unexpected token' — the common JSON errors and how to fix each, with a free validator." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/how-to-fix-json-errors.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa;--bad:#c0341a;--good:#0a7d33}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22;--bad:#ff9492;--good:#7ee787}}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:740px;margin:0 auto;padding:0 20px 60px}header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;line-height:1.2;margin:18px 0 8px}h2{font-size:20px;margin:28px 0 6px}
+    a{color:var(--accent)}.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;margin:10px 0}
+    code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:14px;line-height:1.5;margin:8px 0}
+    .bad b{color:var(--bad)}.good b{color:var(--good)}.muted{color:var(--muted)}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>How to fix common JSON errors</h1>
+    <p class="muted">Most "Unexpected token …" and "JSON.parse" errors come from a handful of small syntax mistakes. Here's each one, why it breaks, and the fix. The fastest way to find yours: paste the JSON into the <a href="app.html">viewer</a> — it points to the exact spot that fails.</p>
+
+    <a class="cta" href="app.html">Validate &amp; fix my JSON →</a>
+
+    <h2>1. Trailing comma</h2>
+    <p>A comma after the last item is the single most common cause of <code>Unexpected token } in JSON</code>.</p>
+    <pre class="bad"><b>✗</b> {"a": 1, "b": 2<b>,</b>}</pre>
+    <pre class="good"><b>✓</b> {"a": 1, "b": 2}</pre>
+
+    <h2>2. Single quotes instead of double</h2>
+    <p>JSON requires double quotes for both keys and string values. Single quotes give <code>Unexpected token ' in JSON</code>.</p>
+    <pre class="bad"><b>✗</b> {<b>'</b>name<b>'</b>: <b>'</b>Ada<b>'</b>}</pre>
+    <pre class="good"><b>✓</b> {"name": "Ada"}</pre>
+
+    <h2>3. Unquoted keys</h2>
+    <p>Object keys must be quoted strings. <code>{name: "Ada"}</code> is valid JavaScript but invalid JSON.</p>
+    <pre class="bad"><b>✗</b> {<b>name</b>: "Ada"}</pre>
+    <pre class="good"><b>✓</b> {"name": "Ada"}</pre>
+
+    <h2>4. Comments</h2>
+    <p>JSON does not allow <code>//</code> or <code>/* */</code> comments. Remove them (or use JSON5 if your parser supports it).</p>
+    <pre class="bad"><b>✗</b> {"a": 1 <b>// the first one</b>}</pre>
+    <pre class="good"><b>✓</b> {"a": 1}</pre>
+
+    <h2>5. Missing comma between items</h2>
+    <pre class="bad"><b>✗</b> {"a": 1<b> </b>"b": 2}</pre>
+    <pre class="good"><b>✓</b> {"a": 1<b>,</b> "b": 2}</pre>
+
+    <h2>6. Unescaped characters in strings</h2>
+    <p>Literal newlines, tabs, or unescaped double quotes inside a string are invalid. Escape them with a backslash.</p>
+    <pre class="bad"><b>✗</b> {"msg": "She said "hi""}</pre>
+    <pre class="good"><b>✓</b> {"msg": "She said \"hi\""}</pre>
+
+    <h2>7. Trailing or wrapping text</h2>
+    <p>A JSON document must be a single value. A variable assignment, an anti-hijacking prefix like <code>)]}',</code>, or a stray character at the end all cause parse errors. Keep only the JSON itself.</p>
+    <pre class="bad"><b>✗</b> <b>var data =</b> {"a": 1}<b>;</b></pre>
+    <pre class="good"><b>✓</b> {"a": 1}</pre>
+
+    <h2>8. Invalid numbers and values</h2>
+    <p>JSON has no <code>NaN</code>, <code>Infinity</code>, <code>undefined</code>, leading zeros (<code>007</code>), or trailing decimal points. Use a valid number, a quoted string, or <code>null</code>.</p>
+    <pre class="bad"><b>✗</b> {"x": NaN, "y": 007, "z": undefined}</pre>
+    <pre class="good"><b>✓</b> {"x": null, "y": 7, "z": null}</pre>
+
+    <h2>Find the exact error fast</h2>
+    <p>Rather than hunting by eye, paste your JSON into the <a href="app.html">free JSON viewer</a>: it validates as you paste, reports the first error, and renders the rest as a collapsible tree so you can see where the structure breaks — even for large files. Nothing is uploaded; it all runs in your browser.</p>
+    <a class="cta" href="app.html">Open the JSON viewer →</a>
+
+    <footer>
+      More guides: <a href="how-to-validate-json.html">Validate JSON</a> &nbsp;·&nbsp; <a href="how-to-open-large-json-files.html">Open a large JSON file</a> &nbsp;·&nbsp; <a href="query-json-by-path.html">Query JSON by path</a><br>
+      Runs entirely in your browser. <a href="privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="./">JSON Viewer</a>
+    </footer>
+  </div>
+</body>
+</html>

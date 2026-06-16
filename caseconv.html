@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Case Converter — camelCase, snake_case, kebab-case &amp; More (Free)</title>
+  <meta name="description" content="Convert text between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case and more — instantly and free. Runs in your browser; nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/caseconv.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Case Converter" />
+  <meta property="og:description" content="Convert between camelCase, snake_case, kebab-case, CONSTANT_CASE, Title Case and more. Free, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/caseconv.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 18px}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    input#in{width:100%;font:15px/1.5 system-ui,sans-serif;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg)}
+    #out{margin-top:16px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    .row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--border)}.row:last-child{border-bottom:none}
+    .row .lbl{width:130px;flex:none;color:var(--muted);font-size:13px}
+    .row code{flex:1;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+    button{font:inherit;font-size:13px;padding:6px 12px;border-radius:7px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer;flex:none}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>Case Converter</h1>
+    <p class="sub">Type any text or identifier and get it in every common case style. Mixed input — <code>camelCase</code>, <code>snake_case</code>, acronyms — is detected automatically. Runs in your browser.</p>
+
+    <label for="in">Text</label>
+    <input id="in" spellcheck="false" placeholder="e.g. parseHTMLFile or my variable name" value="my variable name" />
+    <div id="out"></div>
+
+    <section class="prose">
+      <h2>The case styles</h2>
+      <p><strong>camelCase</strong> &amp; <strong>PascalCase</strong> for variables and types; <strong>snake_case</strong> &amp; <strong>CONSTANT_CASE</strong> in Python/C and for constants; <strong>kebab-case</strong> for URLs, CSS, and file names; <strong>Title Case</strong> / <strong>Sentence case</strong> for prose. This tool splits your input into words (handling existing camelCase and acronyms like <code>HTMLParser</code>) and rebuilds it in each style.</p>
+      <h2>Related</h2>
+      <p><a href="base64.html">Base64</a> &nbsp;·&nbsp; <a href="json-to-typescript.html">JSON to TypeScript</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="caseconv.js"></script>
+</body>
+</html>

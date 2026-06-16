@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSONPath Cheatsheet — Syntax &amp; Examples (with a Live Tester)</title>
+  <meta name="description" content="A JSONPath cheatsheet with clear examples: root, child, recursive descent, wildcards, array slices, filters, and unions — shown against a sample document, with a live tester to try them." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/jsonpath-cheatsheet.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="JSONPath Cheatsheet" />
+  <meta property="og:description" content="JSONPath syntax and examples — child, recursive descent, wildcards, slices, filters, unions — with a live tester." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/jsonpath-cheatsheet.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22}}
+    *{box-sizing:border-box}body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:820px;margin:0 auto;padding:0 20px 60px}header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 8px}h2{font-size:20px;margin:26px 0 8px}
+    a{color:var(--accent)}.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:11px 20px;border-radius:10px;font-weight:600;margin:8px 0}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:13px;line-height:1.5}
+    table{width:100%;border-collapse:collapse;margin:8px 0;font-size:15px}
+    th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+    th{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.03em}
+    code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:13px;font-family:ui-monospace,Menlo,Consolas,monospace}td:first-child{white-space:nowrap}
+    .muted{color:var(--muted)}footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JSONPath Cheatsheet</h1>
+    <p class="muted">JSONPath is a query language for picking values out of a JSON document — like XPath for JSON. Here's the syntax with worked examples. Run any of them live in the <a href="jsonpath.html">JSONPath tester</a>.</p>
+    <a class="cta" href="jsonpath.html">Open the JSONPath tester →</a>
+
+    <h2>Sample document</h2>
+    <p class="muted">The examples below run against this JSON:</p>
+    <pre>{
+  "store": {
+    "book": [
+      { "title": "Sayings of the Century", "price": 8.95 },
+      { "title": "Moby Dick", "price": 12.99 },
+      { "title": "The Lord of the Rings", "price": 22.99 }
+    ],
+    "bicycle": { "color": "red", "price": 19.95 }
+  }
+}</pre>
+
+    <h2>Operators</h2>
+    <table>
+      <tr><th>Syntax</th><th>Meaning</th></tr>
+      <tr><td><code>$</code></td><td>The root object</td></tr>
+      <tr><td><code>.key</code> or <code>['key']</code></td><td>Child by name</td></tr>
+      <tr><td><code>..key</code></td><td>Recursive descent — find <code>key</code> at any depth</td></tr>
+      <tr><td><code>*</code></td><td>Wildcard — all children</td></tr>
+      <tr><td><code>[n]</code></td><td>Array element by index (0-based)</td></tr>
+      <tr><td><code>[start:end]</code></td><td>Array slice (end exclusive)</td></tr>
+      <tr><td><code>[?(@.x > 1)]</code></td><td>Filter — elements where the expression is true (<code>@</code> = current item)</td></tr>
+      <tr><td><code>[a,b]</code></td><td>Union — multiple names or indices</td></tr>
+    </table>
+
+    <h2>Examples</h2>
+    <table>
+      <tr><th>JSONPath</th><th>Selects</th></tr>
+      <tr><td><code>$.store.book[*].title</code></td><td>All three book titles</td></tr>
+      <tr><td><code>$..price</code></td><td>Every price: <code>8.95, 12.99, 22.99, 19.95</code></td></tr>
+      <tr><td><code>$.store.book[0]</code></td><td>The first book object</td></tr>
+      <tr><td><code>$.store.book[-1].title</code></td><td>"The Lord of the Rings" (last book)</td></tr>
+      <tr><td><code>$.store.book[0:2]</code></td><td>The first two books</td></tr>
+      <tr><td><code>$.store.book[?(@.price &lt; 10)]</code></td><td>Books cheaper than 10 (the first book)</td></tr>
+      <tr><td><code>$..book[?(@.price &gt; 20)].title</code></td><td>Titles of books over 20</td></tr>
+      <tr><td><code>$.store.*</code></td><td>Everything in the store (the book array and the bicycle)</td></tr>
+      <tr><td><code>$..*</code></td><td>Every value in the document, recursively</td></tr>
+    </table>
+
+    <p class="muted">Note: a few details (e.g. negative indices, the exact filter grammar) vary between JSONPath implementations. Paste your document into the <a href="jsonpath.html">tester</a> to confirm what a given expression returns for your data.</p>
+
+    <a class="cta" href="jsonpath.html">Try these in the JSONPath tester →</a>
+
+    <footer>
+      Related: <a href="jsonpath.html">JSONPath tester</a> &nbsp;·&nbsp; <a href="query-json-by-path.html">Guide: query JSON by path</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a> &nbsp;·&nbsp; <a href="tools.html">All tools</a><br>
+      Runs entirely in your browser. <a href="privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regex Tester — Test &amp; Debug Regular Expressions Online (Free)</title>
+  <meta name="description" content="Test and debug regular expressions live: see matches highlighted, capture groups, and named groups, with g/i/m/s flags. Free, runs in your browser — nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/regex.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Regex Tester" />
+  <meta property="og:description" content="Test regular expressions live — highlighted matches, capture &amp; named groups, g/i/m/s flags. Free, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/regex.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --bad:#c0341a; --mark:#fff3a3; --markfg:#1f2328; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --bad:#ff7b72; --mark:#9e6a03; --markfg:#fff; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 18px}
+    label{font-size:13px;color:var(--muted);display:block;margin:12px 0 5px}
+    .patrow{display:flex;align-items:center;gap:6px;border:1px solid var(--border);border-radius:10px;padding:0 10px;background:var(--bg)}
+    .patrow .slash{color:var(--muted);font:15px ui-monospace,monospace}
+    #pattern{flex:1;border:none;outline:none;background:transparent;color:var(--fg);font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px 4px}
+    .flags{display:flex;gap:12px;margin:10px 0;flex-wrap:wrap}.flags label{display:flex;align-items:center;gap:5px;margin:0;color:var(--fg);font-size:14px}
+    textarea{width:100%;height:150px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .err{color:var(--bad);font-size:14px;min-height:18px;margin:6px 0}
+    #count{color:var(--muted);font-size:14px;margin:10px 0 4px}
+    #hl{border:1px solid var(--border);border-radius:10px;padding:11px;white-space:pre-wrap;word-break:break-word;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace;min-height:40px}
+    #hl mark{background:var(--mark);color:var(--markfg);border-radius:3px;padding:0 1px}
+    #matches{margin-top:12px}.mrow{padding:5px 0;border-bottom:1px solid var(--border);font-size:13px}.mrow code{background:var(--soft);padding:1px 5px;border-radius:4px}
+    .muted{color:var(--muted)}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>Regex Tester</h1>
+    <p class="sub">Test a regular expression against your text and see matches highlighted live, with capture and named groups. Uses JavaScript regex; runs entirely in your browser.</p>
+
+    <label for="pattern">Pattern</label>
+    <div class="patrow"><span class="slash">/</span><input id="pattern" spellcheck="false" placeholder="\d+|[a-z]+" value="\b\w+@\w+\.\w+\b" /><span class="slash">/</span></div>
+    <div class="flags">
+      <label><input type="checkbox" id="f-g" checked /> g <span class="muted">global</span></label>
+      <label><input type="checkbox" id="f-i" /> i <span class="muted">ignore case</span></label>
+      <label><input type="checkbox" id="f-m" /> m <span class="muted">multiline</span></label>
+      <label><input type="checkbox" id="f-s" /> s <span class="muted">dotall</span></label>
+    </div>
+
+    <label for="text">Test string</label>
+    <textarea id="text" spellcheck="false" placeholder="Paste text to test against">Contact alice@example.com or bob@test.org for details.</textarea>
+    <div class="err" id="err"></div>
+    <div id="count"></div>
+    <div id="hl"></div>
+    <div id="matches"></div>
+
+    <section class="prose">
+      <h2>Tips</h2>
+      <p>Flags: <strong>g</strong> finds all matches (on by default here), <strong>i</strong> ignores case, <strong>m</strong> makes <code>^</code>/<code>$</code> match line starts/ends, <strong>s</strong> lets <code>.</code> match newlines. Capture groups <code>(...)</code> and named groups <code>(?&lt;name&gt;...)</code> are listed per match. This uses the JavaScript regex engine, so it matches what runs in the browser and Node.</p>
+      <h2>Related</h2>
+      <p><a href="textdiff.html">Text diff</a> &nbsp;·&nbsp; <a href="caseconv.html">Case converter</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="regex.js"></script>
+</body>
+</html>

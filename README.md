@@ -19,3 +19,8 @@ No accounts, no analytics, no tracking, no network requests of its own. Everythi
 
 ## Pro
 A one-time Pro unlock adds JSONPath querying and CSV/Excel export inside the big-file viewer. Everything else is free.
+
+## More free tools
+- [Finance calculators](https://myastroapp.github.io/rental-calculator/) — rental property, mortgage, affordability, payoff
+- [Invoice / estimate / receipt generator](https://myastroapp.github.io/invoice-generator/) — free, no sign-up
+- [Resume builder + cover letter + ATS checker](https://myastroapp.github.io/resume-builder/) — free, private

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>URL Encode / Decode — Online &amp; Private (Component vs Full URL)</title>
+  <meta name="description" content="Encode and decode URLs online, free. Shows both component encoding (encodeURIComponent) and full-URL encoding (encodeURI) so you pick the right one. Runs in your browser; nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/urlencode.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="URL Encode / Decode" />
+  <meta property="og:description" content="Encode/decode URLs online — component vs full-URL encoding, side by side. Free, private, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/urlencode.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --bad:#c0341a; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --bad:#ff7b72; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 18px}
+    label{font-size:13px;color:var(--muted);display:block;margin:12px 0 5px}
+    textarea{width:100%;height:90px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .outrow{display:flex;align-items:flex-start;gap:8px}.outrow textarea{height:64px}
+    .row{display:flex;gap:8px;align-items:center;margin:12px 0;flex-wrap:wrap}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    .copy{padding:7px 12px;font-size:13px}
+    .err{color:var(--bad);font-size:14px;min-height:18px;margin:4px 0}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px} code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>URL Encode / Decode</h1>
+    <p class="sub">Percent-encode text for use in a URL, or decode it back. Encoding shows both variants so you can pick the right one. Runs in your browser; nothing uploaded.</p>
+
+    <label for="in">Input</label>
+    <textarea id="in" spellcheck="false" placeholder="Type text to encode, or paste an encoded string to decode">name=John Doe&city=São Paulo</textarea>
+    <div class="row">
+      <button class="primary" id="encode">Encode →</button>
+      <button id="decode">← Decode</button>
+    </div>
+    <div class="err" id="err"></div>
+
+    <label>Component encoding — <code>encodeURIComponent</code> (use for a query value or path segment)</label>
+    <div class="outrow"><textarea id="out-comp" spellcheck="false" readonly></textarea><button class="copy" data-copy="out-comp">Copy</button></div>
+
+    <label>Full-URL encoding — <code>encodeURI</code> (use for a whole URL; keeps <code>:/?&amp;=#</code>)</label>
+    <div class="outrow"><textarea id="out-full" spellcheck="false" readonly></textarea><button class="copy" data-copy="out-full">Copy</button></div>
+
+    <section class="prose">
+      <h2>Component vs. full URL — the common mistake</h2>
+      <p>Use <strong>component encoding</strong> when you're building one piece of a URL — a query parameter value or a single path segment — because it escapes the reserved characters <code>/ ? & = #</code> that would otherwise break the URL's structure. Use <strong>full-URL encoding</strong> only on an already-assembled URL, where those characters are meant to stay. Encoding a whole URL with component encoding mangles it; encoding a value with full-URL encoding leaves <code>&amp;</code> and <code>=</code> unescaped and breaks your query string. When in doubt, encode each <em>value</em> with component encoding.</p>
+      <p class="sub">Note: when <em>decoding</em>, a <code>+</code> means a literal plus here (standard <code>decodeURIComponent</code>); in <code>application/x-www-form-urlencoded</code> query strings, <code>+</code> historically means a space.</p>
+      <h2>Related</h2>
+      <p><a href="base64.html">Base64 encode/decode</a> &nbsp;·&nbsp; <a href="caseconv.html">Case converter</a> &nbsp;·&nbsp; <a href="tools.html">All developer tools</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="base64.html">Base64</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="urlencode.js"></script>
+</body>
+</html>

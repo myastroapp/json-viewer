@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lorem Ipsum Generator — Placeholder Text (Free, Instant)</title>
+  <meta name="description" content="Generate Lorem Ipsum placeholder text — by paragraphs, sentences, or words, with one-click copy. Free, instant, runs in your browser." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/loremipsum.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lorem Ipsum Generator" />
+  <meta property="og:description" content="Generate placeholder text by paragraphs, sentences, or words — free, instant, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/loremipsum.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:780px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 18px}
+    .row{display:flex;gap:12px;align-items:center;margin:12px 0;flex-wrap:wrap}
+    .row label{font-size:14px;display:flex;align-items:center;gap:6px}
+    input[type=number]{width:74px;font:inherit;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg)}
+    select{font:inherit;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg)}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    textarea{width:100%;height:300px;font:15px/1.65 Georgia,'Times New Roman',serif;padding:13px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>Lorem Ipsum Generator</h1>
+    <p class="sub">Generate placeholder text for mockups, layouts, and content templates. Choose how much and what unit, then copy.</p>
+
+    <div class="row">
+      <label>How many: <input type="number" id="count" value="3" min="1" max="100" /></label>
+      <label>Unit:
+        <select id="unit">
+          <option value="paragraphs">Paragraphs</option>
+          <option value="sentences">Sentences</option>
+          <option value="words">Words</option>
+        </select>
+      </label>
+      <label><input type="checkbox" id="classic" checked /> Start with "Lorem ipsum…"</label>
+      <button class="primary" id="gen">Generate</button>
+      <button id="copy">Copy</button>
+    </div>
+    <textarea id="out" spellcheck="false" readonly></textarea>
+
+    <section class="prose">
+      <h2>What is Lorem Ipsum?</h2>
+      <p>Lorem Ipsum is scrambled, meaningless Latin-like text used as a placeholder in design and development since the 1500s. It lets you see how a layout looks with text in it without the distraction of readable content — useful for wireframes, templates, CMS previews, and component demos. This generator builds it from the classic word set, in your browser.</p>
+      <h2>Related</h2>
+      <p><a href="wordcount.html">Word counter</a> &nbsp;·&nbsp; <a href="caseconv.html">Case converter</a> &nbsp;·&nbsp; <a href="tools.html">All developer tools</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="tools.html">All tools</a></footer>
+  </div>
+  <script type="module" src="loremipsum.js"></script>
+</body>
+</html>

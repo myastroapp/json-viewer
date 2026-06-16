@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Text Diff Checker — Compare Two Texts Online (Free &amp; Private)</title>
+  <meta name="description" content="Compare two blocks of text or code line by line and see exactly what was added, removed, and unchanged. Free diff checker that runs in your browser — nothing is uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/textdiff.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Text Diff Checker" />
+  <meta property="og:description" content="Compare two texts line by line — additions, removals, unchanged. Free, private, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/textdiff.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --add:#0a7d33; --del:#c0341a; --addbg:#e6ffed; --delbg:#ffeef0; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --add:#3fb950; --del:#ff7b72; --addbg:#12261a; --delbg:#2d1417; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 18px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:680px){.cols{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    textarea{width:100%;height:220px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .err{color:var(--del);font-size:14px;min-height:18px;margin:6px 0}
+    #stats{margin:10px 0;font-size:14px}#stats .add{color:var(--add);font-weight:600}#stats .del{color:var(--del);font-weight:600}
+    #out{border:1px solid var(--border);border-radius:10px;overflow:auto;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace}
+    .dl{display:flex;gap:8px;padding:1px 10px;white-space:pre-wrap;word-break:break-word}
+    .dl .sg{flex:none;width:12px;color:var(--muted);user-select:none}
+    .dl.add{background:var(--addbg)}.dl.add .sg{color:var(--add)}
+    .dl.del{background:var(--delbg)}.dl.del .sg{color:var(--del)}
+    .muted{color:var(--muted)}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>Text Diff Checker</h1>
+    <p class="sub">Paste two versions of text or code and see exactly what changed — line by line. Everything runs in your browser; nothing is uploaded.</p>
+
+    <div class="cols">
+      <div><label for="a">Original</label><textarea id="a" spellcheck="false" placeholder="Paste the original text"></textarea></div>
+      <div><label for="b">Changed</label><textarea id="b" spellcheck="false" placeholder="Paste the changed text"></textarea></div>
+    </div>
+    <div class="err" id="err"></div>
+    <div id="stats"></div>
+    <div id="out"></div>
+
+    <section class="prose">
+      <h2>How it works</h2>
+      <p>This compares the two inputs line by line using a longest-common-subsequence diff (the same idea behind <code>git diff</code>): lines only in the original are marked removed (<span style="color:var(--del)">−</span>), lines only in the changed version are added (<span style="color:var(--add)">+</span>), and matching lines are shown as context. It runs entirely locally, so it's safe for private code or documents.</p>
+      <h2>Working with JSON?</h2>
+      <p>For comparing JSON by structure (keys and values) rather than by line, use the <a href="diff.html">JSON diff</a> tool, or explore a file in the <a href="app.html">JSON viewer</a>.</p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="diff.html">JSON diff</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="textdiff.js"></script>
+</body>
+</html>

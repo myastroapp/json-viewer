@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Online Developer Tools — JSON, Base64, JWT, Regex &amp; More</title>
+  <meta name="description" content="A free, private set of developer tools that run entirely in your browser: JSON viewer/formatter, converters (CSV, YAML, TypeScript), Base64, JWT decoder, SHA hash, regex tester, diff, and more. No sign-up, nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/tools.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Online Developer Tools" />
+  <meta property="og:description" content="JSON, Base64, JWT, regex, hash, diff, converters — free, private, in your browser. No sign-up." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/tools.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:32px;margin:18px 0 8px;letter-spacing:-.02em}.sub{color:var(--muted);margin:0 0 8px;font-size:18px;max-width:640px}
+    h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:34px 0 12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+    .card{display:block;border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--fg);background:var(--bg);transition:border-color .12s,background .12s}
+    .card:hover{border-color:var(--accent);background:var(--soft)}
+    .card .nm{font-weight:700;font-size:15px;color:var(--accent)}
+    .card .ds{color:var(--muted);font-size:14px;margin-top:3px}
+    .note{background:var(--soft);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--muted);font-size:14px;margin:22px 0}
+    footer{border-top:1px solid var(--border);margin-top:44px;padding:22px 0 48px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>Free Online Developer Tools</h1>
+    <p class="sub">A set of fast, focused developer tools that run <strong>entirely in your browser</strong> — no sign-up, no ads, and nothing is ever uploaded. Safe for private data, tokens, and code.</p>
+    <div class="note">🔒 Every tool here runs 100% locally in your browser. Paste sensitive JSON, JWTs, or code freely — it never leaves your device.</div>
+
+    <h2>Format &amp; validate</h2>
+    <div class="grid">
+      <a class="card" href="app.html"><div class="nm">JSON Viewer</div><div class="ds">Open &amp; explore large JSON in a fast collapsible tree with search — without freezing.</div></a>
+      <a class="card" href="format.html"><div class="nm">JSON Formatter / Minifier</div><div class="ds">Beautify or minify JSON with one click, with syntax highlighting.</div></a>
+      <a class="card" href="how-to-validate-json.html"><div class="nm">Validate JSON</div><div class="ds">Check JSON validity and find the exact error.</div></a>
+      <a class="card" href="how-to-fix-json-errors.html"><div class="nm">Fix JSON Errors</div><div class="ds">Common "Unexpected token" causes and how to fix each.</div></a>
+    </div>
+
+    <h2>Convert</h2>
+    <div class="grid">
+      <a class="card" href="json-to-csv.html"><div class="nm">JSON → CSV</div><div class="ds">Turn an array of objects into a clean CSV for Excel or Sheets.</div></a>
+      <a class="card" href="csv-to-json.html"><div class="nm">CSV → JSON</div><div class="ds">Parse CSV (quoted fields and all) into JSON, with safe type handling.</div></a>
+      <a class="card" href="json-to-yaml.html"><div class="nm">JSON → YAML</div><div class="ds">Convert JSON to YAML for config files — types preserved.</div></a>
+      <a class="card" href="json-to-typescript.html"><div class="nm">JSON → TypeScript</div><div class="ds">Generate TypeScript interfaces from a JSON sample.</div></a>
+      <a class="card" href="ndjson.html"><div class="nm">NDJSON ⇄ JSON</div><div class="ds">Convert between newline-delimited JSON and a JSON array.</div></a>
+    </div>
+
+    <h2>Inspect &amp; compare</h2>
+    <div class="grid">
+      <a class="card" href="jsonpath.html"><div class="nm">JSONPath Tester</div><div class="ds">Evaluate JSONPath expressions against your JSON.</div></a>
+      <a class="card" href="diff.html"><div class="nm">JSON Diff</div><div class="ds">Compare two JSON documents by structure — keys and values.</div></a>
+      <a class="card" href="textdiff.html"><div class="nm">Text Diff Checker</div><div class="ds">Compare two texts or code blocks line by line.</div></a>
+    </div>
+
+    <h2>Encode &amp; decode</h2>
+    <div class="grid">
+      <a class="card" href="base64.html"><div class="nm">Base64 Encode / Decode</div><div class="ds">UTF-8-safe Base64, with a URL-safe option.</div></a>
+      <a class="card" href="jwt-decoder.html"><div class="nm">JWT Decoder</div><div class="ds">Decode a JSON Web Token's header, payload, and expiry — locally.</div></a>
+      <a class="card" href="epoch.html"><div class="nm">Unix Timestamp Converter</div><div class="ds">Convert epoch ⇄ date; auto-detects seconds vs milliseconds.</div></a>
+      <a class="card" href="hash.html"><div class="nm">SHA Hash Generator</div><div class="ds">SHA-256/1/384/512 hashes via your browser's crypto.</div></a>
+    </div>
+
+    <h2>Text</h2>
+    <div class="grid">
+      <a class="card" href="caseconv.html"><div class="nm">Case Converter</div><div class="ds">camelCase, snake_case, kebab-case, CONSTANT_CASE and more.</div></a>
+      <a class="card" href="regex.html"><div class="nm">Regex Tester</div><div class="ds">Test regular expressions live with highlighted matches and groups.</div></a>
+    </div>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; More free tools: <a href="https://myastroapp.github.io/rental-calculator/">Finance calculators</a> · <a href="https://myastroapp.github.io/invoice-generator/">Invoice generator</a> · <a href="https://myastroapp.github.io/resume-builder/">Resume builder</a></footer>
+  </div>
+</body>
+</html>

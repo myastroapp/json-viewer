@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON Flatten — Nested JSON to Dot-Notation Keys (Free)</title>
+  <meta name="description" content="Flatten nested JSON into flat dot/bracket-notation keys (a.b.c, list[0]) — handy for spreadsheets, env vars, and config. Free, runs in your browser; nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/json-flatten.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSON Flatten" />
+  <meta property="og:description" content="Flatten nested JSON to dot-notation keys — for spreadsheets, env vars, config. Free, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/json-flatten.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --bad:#c0341a; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --bad:#ff7b72; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 16px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:680px){.cols{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    textarea{width:100%;height:300px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .row{display:flex;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    .err{color:var(--bad);font-size:14px;min-height:18px;margin:4px 0}
+    section.prose{margin:34px 0;color:var(--fg)} section.prose h2{font-size:20px} code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JSON Flatten</h1>
+    <p class="sub">Turn nested JSON into a flat map of dot/bracket-notation keys — <code>a.b.c</code>, <code>list[0]</code>. Useful for spreadsheets, environment variables, feature flags, and config. Runs in your browser.</p>
+
+    <div class="cols">
+      <div>
+        <label for="in">Nested JSON in</label>
+        <textarea id="in" spellcheck="false" placeholder='{"user":{"name":"Ada","roles":["admin","dev"]}}'></textarea>
+      </div>
+      <div>
+        <label for="out">Flattened JSON out</label>
+        <textarea id="out" spellcheck="false" readonly placeholder="flattened keys appear here"></textarea>
+      </div>
+    </div>
+    <div class="err" id="err"></div>
+    <div class="row">
+      <button class="primary" id="convert">Flatten</button>
+      <button id="copy">Copy</button>
+    </div>
+
+    <section class="prose">
+      <h2>How it works</h2>
+      <p>Each leaf value gets a single key built from its full path: nested object keys join with dots (<code>user.name</code>), and array elements use bracket indices (<code>roles[0]</code>). Empty objects and arrays are preserved as <code>{}</code> / <code>[]</code> so the structure round-trips. Flattening makes deeply-nested JSON easy to scan, diff, drop into a CSV column set, or map to <code>UPPER_SNAKE</code> env vars.</p>
+      <h2>Related</h2>
+      <p><a href="app.html">JSON viewer</a> &nbsp;·&nbsp; <a href="json-to-csv.html">JSON → CSV</a> &nbsp;·&nbsp; <a href="format.html">JSON formatter</a> &nbsp;·&nbsp; <a href="tools.html">All tools</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="jsonflatten.js"></script>
+</body>
+</html>

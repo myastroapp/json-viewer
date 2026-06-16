@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JWT Decoder — Decode a JSON Web Token Locally (Free &amp; Private)</title>
+  <meta name="description" content="Decode a JWT (JSON Web Token) to read its header and payload — free, online, and 100% private. Your token is decoded in your browser and never uploaded. Shows expiry and claims." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/jwt-decoder.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JWT Decoder — private, in your browser" />
+  <meta property="og:description" content="Decode a JSON Web Token's header and payload locally. Your token is never uploaded." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/jwt-decoder.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --bad:#c0341a; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --bad:#ff9492; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 16px}
+    .note{background:var(--soft);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:14px;color:var(--muted);margin:0 0 16px}
+    label{font-size:13px;color:var(--muted);display:block;margin:14px 0 5px}
+    textarea{width:100%;height:130px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .err{color:var(--bad);font-size:14px;min-height:18px;margin:6px 0}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:680px){.cols{grid-template-columns:1fr}}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;min-height:120px;margin:6px 0}
+    .claims{margin:14px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    .cl{display:flex;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--border);font-size:14px}.cl:last-child{border-bottom:none}.cl span:first-child{color:var(--muted)}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer;margin-top:8px}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JWT Decoder</h1>
+    <p class="sub">Paste a JSON Web Token to read its header and payload, with issued/expiry times decoded.</p>
+    <p class="note">🔒 Your token is decoded <strong>entirely in your browser</strong> and never sent anywhere — safe for real tokens, unlike most online decoders. This tool <strong>decodes</strong> a JWT; it does not verify the signature (that requires your secret or public key).</p>
+
+    <label for="in">Paste JWT</label>
+    <textarea id="in" spellcheck="false" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</textarea>
+    <div class="err" id="err"></div>
+
+    <div class="claims" id="claims"></div>
+
+    <div class="cols">
+      <div><label>Header</label><pre id="header"></pre></div>
+      <div><label>Payload</label><pre id="payload"></pre></div>
+    </div>
+    <button id="copy">Copy payload</button>
+
+    <section class="prose">
+      <h2>What is a JWT?</h2>
+      <p>A JSON Web Token has three base64url-encoded parts separated by dots: a <strong>header</strong> (the signing algorithm), a <strong>payload</strong> (the claims — who the token is for, when it was issued, when it expires), and a <strong>signature</strong>. The header and payload are only encoded, not encrypted, so anyone can read them — which is exactly what this tool shows.</p>
+      <h2>Decode vs. verify</h2>
+      <p>Decoding reveals the claims; <em>verifying</em> proves the token wasn't tampered with and needs the secret (HMAC) or public key (RSA/EC). This tool decodes locally so you can inspect a token safely; it never transmits it. To explore a large or deeply-nested payload, send it to the full <a href="app.html">JSON viewer</a>.</p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="app.html">JSON viewer</a> &nbsp;·&nbsp; <a href="how-to-fix-json-errors.html">Fix JSON errors</a></footer>
+  </div>
+  <script type="module" src="jwt.js"></script>
+</body>
+</html>

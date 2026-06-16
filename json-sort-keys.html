@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON Sort Keys — Alphabetize JSON (Free &amp; Private)</title>
+  <meta name="description" content="Sort JSON object keys alphabetically (recursively) to canonicalize JSON for clean git diffs and easy scanning. Arrays keep their order. Free, runs in your browser." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/json-sort-keys.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSON Sort Keys" />
+  <meta property="og:description" content="Alphabetize JSON object keys (recursively) for clean diffs. Arrays keep order. Free, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/json-sort-keys.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --bad:#c0341a; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --bad:#ff7b72; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 16px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:680px){.cols{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    textarea{width:100%;height:300px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .row{display:flex;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    label.opt{font-size:14px;color:var(--fg);display:flex;align-items:center;gap:6px}
+    .err{color:var(--bad);font-size:14px;min-height:18px;margin:4px 0}
+    section.prose{margin:34px 0;color:var(--fg)} section.prose h2{font-size:20px} code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JSON Sort Keys</h1>
+    <p class="sub">Alphabetize the keys of a JSON object, recursively, so two documents with the same data produce the same text. Arrays keep their order. Runs in your browser.</p>
+
+    <div class="cols">
+      <div>
+        <label for="in">JSON in</label>
+        <textarea id="in" spellcheck="false" placeholder='{"name":"Ada","age":36,"address":{"zip":"10001","city":"NYC"}}'></textarea>
+      </div>
+      <div>
+        <label for="out">Sorted JSON out</label>
+        <textarea id="out" spellcheck="false" readonly placeholder="sorted JSON appears here"></textarea>
+      </div>
+    </div>
+    <div class="err" id="err"></div>
+    <div class="row">
+      <button class="primary" id="convert">Sort keys</button>
+      <button id="copy">Copy</button>
+      <label class="opt"><input type="checkbox" id="desc" /> Z→A (descending)</label>
+    </div>
+
+    <section class="prose">
+      <h2>Why sort JSON keys?</h2>
+      <p>Object key order isn't significant in JSON, but it <em>is</em> significant to <code>git diff</code> and the human eye. Canonicalizing keys into a consistent (alphabetical) order means two equivalent objects produce identical text — so diffs show only real changes, config files stay tidy, and snapshots are stable. This sorts every nested object recursively while leaving array element order untouched (arrays <em>are</em> ordered data).</p>
+      <h2>Related</h2>
+      <p><a href="format.html">JSON formatter</a> &nbsp;·&nbsp; <a href="diff.html">JSON diff</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a> &nbsp;·&nbsp; <a href="tools.html">All tools</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="jsonsort.js"></script>
+</body>
+</html>

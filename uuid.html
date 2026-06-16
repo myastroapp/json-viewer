@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UUID Generator (v4) — Free, Bulk, In-Browser</title>
+  <meta name="description" content="Generate random UUID v4 / GUID values, free — one or hundreds at once, uppercase or no-dashes options, one-click copy. Generated in your browser with crypto-strong randomness." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/uuid.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="UUID Generator (v4)" />
+  <meta property="og:description" content="Generate random UUID v4 / GUID values — bulk, uppercase/no-dashes options, copy. In your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/uuid.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 18px}
+    .row{display:flex;gap:14px;align-items:center;margin:12px 0;flex-wrap:wrap}
+    label.opt{font-size:14px;color:var(--fg);display:flex;align-items:center;gap:6px}
+    input[type=number]{width:80px;font:inherit;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg)}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    textarea{width:100%;height:220px;font:14px/1.6 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px} code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>UUID Generator</h1>
+    <p class="sub">Generate random version-4 UUIDs (GUIDs) using your browser's crypto-strong randomness. Make one or hundreds at once.</p>
+
+    <div class="row">
+      <label class="opt">How many: <input type="number" id="count" value="5" min="1" max="500" /></label>
+      <button class="primary" id="gen">Generate</button>
+      <button id="copy">Copy all</button>
+      <label class="opt"><input type="checkbox" id="upper" /> Uppercase</label>
+      <label class="opt"><input type="checkbox" id="nodash" /> No dashes</label>
+    </div>
+    <textarea id="out" spellcheck="false" readonly></textarea>
+
+    <section class="prose">
+      <h2>What's a UUID v4?</h2>
+      <p>A UUID (universally unique identifier), also called a GUID, is a 128-bit value written as 32 hex digits in the form <code>xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</code>. <strong>Version 4</strong> is random: 122 of the bits come from a random source, so collisions are astronomically unlikely — you can generate them independently on different machines without coordination. The <code>4</code> marks the version and the <code>y</code> (one of 8/9/a/b) marks the variant.</p>
+      <p>These are generated locally with <code>crypto.getRandomValues</code> / <code>crypto.randomUUID</code> — never on a server — so they're suitable for real keys and IDs.</p>
+      <h2>Related</h2>
+      <p><a href="hash.html">SHA hash generator</a> &nbsp;·&nbsp; <a href="base64.html">Base64</a> &nbsp;·&nbsp; <a href="tools.html">All developer tools</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="uuid.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTML Entity Encode / Decode — Escape HTML Online (Free &amp; Private)</title>
+  <meta name="description" content="Encode text to HTML entities (escape &lt; &gt; &amp; &quot; ') or decode entities back to text. Optional encode-all for non-ASCII. Free, runs in your browser — nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/htmlentities.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="HTML Entity Encode / Decode" />
+  <meta property="og:description" content="Escape HTML or decode entities back to text. UTF-8 aware, optional non-ASCII encoding. Free, in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/htmlentities.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --bad:#c0341a; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --bad:#ff7b72; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 18px}
+    label.fld{font-size:13px;color:var(--muted);display:block;margin:12px 0 5px}
+    textarea{width:100%;height:160px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .row{display:flex;gap:8px;align-items:center;margin:12px 0;flex-wrap:wrap}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    label.opt{font-size:14px;color:var(--fg);display:flex;align-items:center;gap:6px}
+    .err{color:var(--bad);font-size:14px;min-height:18px;margin:4px 0}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px} code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>HTML Entity Encode / Decode</h1>
+    <p class="sub">Escape text so it's safe to drop into HTML (<code>&lt; &gt; &amp; " '</code>), or decode entities back to readable text. Runs in your browser.</p>
+
+    <label class="fld" for="in">Input</label>
+    <textarea id="in" spellcheck="false" placeholder="Text to escape, or HTML with entities to decode"></textarea>
+    <div class="row">
+      <button class="primary" id="encode">Encode →</button>
+      <button id="decode">← Decode</button>
+      <button id="copy">Copy</button>
+      <label class="opt"><input type="checkbox" id="all" /> Also encode non-ASCII (é, 日, emoji → numeric)</label>
+    </div>
+    <div class="err" id="err"></div>
+    <label class="fld" for="out">Output</label>
+    <textarea id="out" spellcheck="false" readonly></textarea>
+
+    <section class="prose">
+      <h2>When you need this</h2>
+      <p>To display user text or code <em>as text</em> inside an HTML page, the characters <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, <code>"</code>, and <code>'</code> must be escaped to entities — otherwise the browser treats them as markup (and unescaped user input is the classic XSS hole). Decoding does the reverse: turn <code>&amp;lt;</code> back into <code>&lt;</code>. The optional <strong>encode non-ASCII</strong> turns accented letters, CJK, and emoji into numeric entities for legacy-charset safety, while leaving normal ASCII readable.</p>
+      <h2>Related</h2>
+      <p><a href="jsonescape.html">JSON string escape</a> &nbsp;·&nbsp; <a href="urlencode.html">URL encode</a> &nbsp;·&nbsp; <a href="base64.html">Base64</a> &nbsp;·&nbsp; <a href="tools.html">All developer tools</a></p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="htmlentities.js"></script>
+</body>
+</html>

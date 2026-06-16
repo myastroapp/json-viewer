@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON to YAML Converter — Free, Online &amp; Private</title>
+  <meta name="description" content="Convert JSON to YAML online, free. Paste JSON, get clean YAML — types preserved (numeric-looking strings stay quoted), nesting handled. Runs in your browser; nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/json-to-yaml.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSON to YAML Converter" />
+  <meta property="og:description" content="Convert JSON to YAML online, free and private. Types preserved; runs in your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/json-to-yaml.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 20px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:680px){.cols{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    textarea{width:100%;height:300px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .row{display:flex;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    section.prose{margin:34px 0;color:var(--fg)} section.prose h2{font-size:20px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JSON to YAML Converter</h1>
+    <p class="sub">Paste JSON below and get clean YAML — great for config files, GitHub Actions, Kubernetes, and Docker Compose. Everything runs in your browser; nothing is uploaded.</p>
+
+    <div class="cols">
+      <div>
+        <label for="in">JSON in</label>
+        <textarea id="in" spellcheck="false" placeholder='{"name":"app","version":"1.0","ports":[80,443],"debug":false}'></textarea>
+      </div>
+      <div>
+        <label for="out">YAML out</label>
+        <textarea id="out" spellcheck="false" readonly placeholder="your YAML appears here"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <button class="primary" id="convert">Convert to YAML</button>
+      <button id="download">Download .yaml</button>
+      <button id="copy">Copy YAML</button>
+    </div>
+
+    <section class="prose">
+      <h2>How it works</h2>
+      <p>JSON is a subset of YAML, so the conversion is exact: objects become mapping keys, arrays become sequences, and nesting is indented with two spaces. Types are preserved carefully — a value like <code>"123"</code> or a ZIP code <code>"007"</code> stays a quoted string instead of silently turning into a number, which is the bug most online converters have. It all happens locally; your data never leaves the page.</p>
+      <h2>Working with large or messy JSON?</h2>
+      <p>Use the <a href="app.html">JSON viewer</a> to explore and validate it first, or the <a href="how-to-fix-json-errors.html">fix-JSON-errors guide</a> if it won't parse.</p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="json-to-csv.html">JSON → CSV</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="yaml.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON to XML Converter — Free, Online &amp; Private</title>
+  <meta name="description" content="Convert JSON to XML online, free. Objects become elements, arrays repeat, special characters are escaped. Set the root element name. Runs in your browser; nothing uploaded." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/json-to-xml.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSON to XML Converter" />
+  <meta property="og:description" content="Convert JSON to XML online, free and private. Objects→elements, arrays repeat, escaped. In your browser." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/json-to-xml.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root { --fg:#1f2328; --muted:#656d76; --bg:#fff; --accent:#2563eb; --border:#d0d7de; --soft:#f6f8fa; --bad:#c0341a; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --muted:#8b949e; --bg:#0d1117; --accent:#58a6ff; --border:#30363d; --soft:#161b22; --bad:#ff7b72; } }
+    *{box-sizing:border-box} body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:900px;margin:0 auto;padding:0 20px}
+    header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;margin:18px 0 6px;letter-spacing:-.01em} .sub{color:var(--muted);margin:0 0 16px}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:680px){.cols{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px}
+    textarea{width:100%;height:300px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);resize:vertical}
+    .row{display:flex;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}
+    input#root{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg);width:140px}
+    button{font:inherit;font-size:14px;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--fg);cursor:pointer}
+    button.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+    .err{color:var(--bad);font-size:14px;min-height:18px;margin:4px 0}
+    section.prose{margin:30px 0;color:var(--fg)} section.prose h2{font-size:20px} code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 46px;color:var(--muted);font-size:14px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JSON to XML Converter</h1>
+    <p class="sub">Paste JSON and get XML — objects become elements, arrays repeat their element, and special characters are escaped. Everything runs in your browser; nothing is uploaded.</p>
+
+    <div class="cols">
+      <div>
+        <label for="in">JSON in</label>
+        <textarea id="in" spellcheck="false" placeholder='{"book":[{"title":"A"},{"title":"B"}]}'></textarea>
+      </div>
+      <div>
+        <label for="out">XML out</label>
+        <textarea id="out" spellcheck="false" readonly placeholder="your XML appears here"></textarea>
+      </div>
+    </div>
+    <div class="err" id="err"></div>
+    <div class="row">
+      <label style="margin:0">Root element: <input id="root" value="root" /></label>
+      <button class="primary" id="convert">Convert to XML</button>
+      <button id="copy">Copy XML</button>
+    </div>
+
+    <section class="prose">
+      <h2>How it converts</h2>
+      <p>Each JSON object key becomes an XML element; nested objects nest; an array repeats its element once per item (e.g. <code>"book":[…,…]</code> → two <code>&lt;book&gt;</code> elements); empty objects/arrays and nulls become self-closing tags; and <code>&amp; &lt; &gt;</code> are escaped. Keys that aren't valid XML element names (spaces, leading digits) are sanitized. XML has no single canonical mapping from JSON, so this uses the common element-per-key convention; tweak the root name above.</p>
+      <h2>Need the other direction or a closer look?</h2>
+      <p>Explore or validate the JSON first in the <a href="app.html">JSON viewer</a>, or convert to <a href="json-to-yaml.html">YAML</a> / <a href="json-to-csv.html">CSV</a>.</p>
+    </section>
+
+    <footer>Runs entirely in your browser. <a href="privacy.html">Privacy policy</a>. &nbsp;·&nbsp; <a href="json-to-yaml.html">JSON → YAML</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a></footer>
+  </div>
+  <script type="module" src="jsonxml.js"></script>
+</body>
+</html>

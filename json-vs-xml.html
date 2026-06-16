@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON vs XML — Differences, When to Use Each (With Examples)</title>
+  <meta name="description" content="JSON vs XML compared: syntax, size, data types, comments, schemas, and when each is the right choice — with side-by-side examples and a free JSON↔XML converter." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/json-vs-xml.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="JSON vs XML — When to Use Each" />
+  <meta property="og:description" content="Syntax, size, types, schemas, and when each wins — with side-by-side examples and a free converter." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/json-vs-xml.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22}}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:760px;margin:0 auto;padding:0 20px 60px}header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:29px;line-height:1.2;margin:18px 0 8px}h2{font-size:20px;margin:24px 0 6px}
+    a{color:var(--accent)}.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;margin:10px 0}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:13px;line-height:1.5}
+    table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--muted);font-size:13px}
+    .muted{color:var(--muted)}footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>JSON vs XML</h1>
+    <p class="muted">Both store and exchange structured data, but they're suited to different jobs. JSON is the default for web APIs and JavaScript; XML still dominates documents, legacy enterprise systems, and config where structure and validation matter most.</p>
+    <a class="cta" href="json-to-xml.html">Convert JSON → XML free →</a>
+
+    <h2>The same data, both ways</h2>
+    <pre>// JSON
+{ "user": { "name": "Ada", "admin": true } }
+
+&lt;!-- XML --&gt;
+&lt;user&gt;
+  &lt;name&gt;Ada&lt;/name&gt;
+  &lt;admin&gt;true&lt;/admin&gt;
+&lt;/user&gt;</pre>
+
+    <h2>Side by side</h2>
+    <table>
+      <tr><th></th><th>JSON</th><th>XML</th></tr>
+      <tr><td>Verbosity</td><td>Compact</td><td>More verbose (closing tags)</td></tr>
+      <tr><td>Data types</td><td>Strings, numbers, booleans, null, arrays, objects</td><td>Everything is text (types via schema)</td></tr>
+      <tr><td>Comments</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Attributes</td><td>No (keys only)</td><td>Yes (<code>&lt;a id="1"&gt;</code>)</td></tr>
+      <tr><td>Schema / validation</td><td>JSON Schema</td><td>XSD, DTD (mature)</td></tr>
+      <tr><td>Parse in JS</td><td>Native <code>JSON.parse</code></td><td>DOMParser / libraries</td></tr>
+      <tr><td>Best for</td><td>Web/mobile APIs, config, JS</td><td>Documents, SOAP, RSS, office formats, legacy</td></tr>
+    </table>
+
+    <h2>When to use which</h2>
+    <ul>
+      <li><strong>Use JSON</strong> for almost any new web or mobile API, app config, and anything JavaScript touches — it's lighter and parses natively.</li>
+      <li><strong>Use XML</strong> when you need attributes, comments, mixed content (text + markup), mature schema validation, or you're integrating with systems that require it (SOAP, many enterprise/government and document formats).</li>
+    </ul>
+
+    <h2>Converting between them</h2>
+    <p>Need to move data across? Use the free <a href="json-to-xml.html">JSON → XML converter</a>, or explore and validate a JSON document first in the <a href="app.html">JSON viewer</a>. To compare JSON with YAML instead, see <a href="json-to-yaml.html">JSON → YAML</a>.</p>
+    <a class="cta" href="json-to-xml.html">Open the JSON → XML converter →</a>
+
+    <footer>
+      Related: <a href="json-to-xml.html">JSON → XML</a> &nbsp;·&nbsp; <a href="app.html">JSON viewer</a> &nbsp;·&nbsp; <a href="what-is-a-jwt.html">What is a JWT?</a> &nbsp;·&nbsp; <a href="tools.html">All tools</a><br>
+      Runs entirely in your browser. <a href="privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>

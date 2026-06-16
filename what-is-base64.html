@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What Is Base64? How Base64 Encoding Works (Plain English)</title>
+  <meta name="description" content="A clear explanation of Base64 encoding: how it turns bytes into text, why it's used in JSON, data URIs, email, and JWTs, the ~33% size cost, URL-safe Base64, and why it is NOT encryption." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/what-is-base64.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="What Is Base64? How It Works" />
+  <meta property="og:description" content="How Base64 turns bytes into text, why it's used, the size cost, URL-safe variant, and why it isn't encryption." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/what-is-base64.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa;--bad:#c0341a}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22;--bad:#ff7b72}}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:740px;margin:0 auto;padding:0 20px 60px}header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;line-height:1.2;margin:18px 0 8px}h2{font-size:21px;margin:28px 0 8px}
+    a{color:var(--accent)}.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;margin:10px 0}
+    code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px;font-family:ui-monospace,Menlo,Consolas,monospace}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:14px}
+    .tip{background:var(--soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+    .warn{border-left-color:var(--bad)}.muted{color:var(--muted)}footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>What is Base64?</h1>
+    <p class="muted">Base64 is a way to represent <strong>binary data as plain ASCII text</strong>, using 64 safe characters. It exists so you can move bytes through systems that only handle text — like JSON, URLs, email, and HTML.</p>
+    <a class="cta" href="base64.html">Encode or decode Base64 →</a>
+
+    <h2>How it works</h2>
+    <p>Base64 reads your data in <strong>3-byte chunks</strong> (24 bits) and splits each chunk into <strong>four 6-bit groups</strong>. Each 6-bit group (a value from 0–63) maps to one character from the alphabet <code>A–Z a–z 0–9 + /</code>. So 3 bytes of input become 4 characters of output.</p>
+    <pre>"Man"  →  01001101 01100001 01101110
+       →  010011 010110 000101 101110
+       →   19     22     5      46
+       →   T      W      F      u
+       →  "TWFu"</pre>
+    <p>When the input length isn't a multiple of 3, the output is padded with <code>=</code> so the length is a multiple of 4. That's why Base64 strings often end in <code>=</code> or <code>==</code>.</p>
+
+    <h2>Why it's used</h2>
+    <ul>
+      <li><strong>JSON &amp; APIs</strong> — embed an image or file as a string field.</li>
+      <li><strong>Data URIs</strong> — <code>data:image/png;base64,iVBOR…</code> inlines an image in HTML/CSS.</li>
+      <li><strong>Email (MIME)</strong> — attachments are Base64 so they survive text-only transport.</li>
+      <li><strong>JWTs</strong> — the header and payload are Base64URL-encoded (see <a href="what-is-a-jwt.html">what is a JWT</a>).</li>
+    </ul>
+
+    <h2>The size cost</h2>
+    <p>Because 3 bytes become 4 characters, Base64 makes data about <strong>33% larger</strong>. It's a transport encoding, not compression — don't Base64 things you don't need to.</p>
+
+    <h2>URL-safe Base64</h2>
+    <p>Standard Base64 uses <code>+</code> and <code>/</code>, which have special meaning in URLs. <strong>URL-safe Base64</strong> replaces them with <code>-</code> and <code>_</code> and usually drops the <code>=</code> padding. It's the variant used in JWTs and query strings.</p>
+
+    <div class="tip warn"><strong>Base64 is not encryption.</strong> It's trivially reversible — anyone can decode it. Never use it to "hide" passwords or secrets; it provides zero confidentiality.</div>
+
+    <h2>Try it</h2>
+    <p>The free <a href="base64.html">Base64 encoder/decoder</a> handles UTF-8 text (accents, emoji) and the URL-safe variant, and runs entirely in your browser — safe to paste sensitive values. To hash data one-way instead, use the <a href="hash.html">SHA hash generator</a>.</p>
+    <a class="cta" href="base64.html">Open the Base64 tool →</a>
+
+    <footer>
+      Related: <a href="base64.html">Base64 encode/decode</a> &nbsp;·&nbsp; <a href="what-is-a-jwt.html">What is a JWT?</a> &nbsp;·&nbsp; <a href="hash.html">SHA hash</a> &nbsp;·&nbsp; <a href="tools.html">All developer tools</a><br>
+      Runs entirely in your browser. <a href="privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>

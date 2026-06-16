@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What Is a JWT? A Developer's Guide to JSON Web Tokens</title>
+  <meta name="description" content="A clear, accurate guide to JSON Web Tokens (JWT): the three parts, how signing and verification work, the standard claims, HS256 vs RS256, common security mistakes, and how to decode one safely." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/what-is-a-jwt.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="What Is a JWT? A Developer's Guide" />
+  <meta property="og:description" content="The three parts, signing vs verifying, standard claims, HS256 vs RS256, security pitfalls — and a safe local decoder." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/what-is-a-jwt.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <style>
+    :root{--fg:#1f2328;--muted:#656d76;--bg:#fff;--accent:#2563eb;--border:#d0d7de;--soft:#f6f8fa;--bad:#c0341a;--good:#0a7d33}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf3;--muted:#8b949e;--bg:#0d1117;--accent:#58a6ff;--border:#30363d;--soft:#161b22;--bad:#ff7b72;--good:#3fb950}}
+    *{box-sizing:border-box}body{margin:0;font:17px/1.7 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:var(--bg)}
+    .wrap{max-width:740px;margin:0 auto;padding:0 20px 60px}header{padding:18px 0}.logo{color:var(--accent);text-decoration:none;font-weight:700}
+    h1{font-size:30px;line-height:1.2;margin:18px 0 8px}h2{font-size:21px;margin:30px 0 8px}h3{font-size:17px;margin:20px 0 4px}
+    a{color:var(--accent)}.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600;margin:10px 0}
+    code{background:var(--soft);padding:1px 6px;border-radius:5px;font-size:14px}
+    pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow:auto;font-size:13px;line-height:1.5}
+    .tip{background:var(--soft);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+    .warn{border-left-color:var(--bad)}.muted{color:var(--muted)}
+    table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px}th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--muted)}
+    footer{border-top:1px solid var(--border);margin-top:40px;padding:22px 0 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="logo" href="./">{ } JSON Viewer</a></header>
+    <h1>What is a JWT?</h1>
+    <p class="muted">A JSON Web Token (JWT, often pronounced "jot") is a compact, signed way to carry claims — like "who this user is" — between two parties. It's the format behind most modern API authentication. This guide explains exactly how it works, what's safe to put in one, and the mistakes to avoid.</p>
+
+    <a class="cta" href="jwt-decoder.html">Decode a JWT now (in your browser) →</a>
+
+    <h2>The three parts</h2>
+    <p>A JWT is three Base64URL-encoded sections joined by dots: <code>header.payload.signature</code>.</p>
+    <pre>eyJhbGciOiJIUzI1NiJ9   ← header
+.eyJzdWIiOiIxMjMiLCJleHAiOjE3MDAwMDAwMDB9   ← payload
+.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk   ← signature</pre>
+    <ul>
+      <li><strong>Header</strong> — the signing algorithm and token type, e.g. <code>{"alg":"HS256","typ":"JWT"}</code>.</li>
+      <li><strong>Payload</strong> — the <em>claims</em>: data about the user and the token (see below).</li>
+      <li><strong>Signature</strong> — a cryptographic signature over the header and payload, so the receiver can detect tampering.</li>
+    </ul>
+    <div class="tip warn"><strong>Critical:</strong> the header and payload are only <strong>Base64URL-encoded, not encrypted</strong>. Anyone holding the token can read them. Never put passwords, secrets, or sensitive personal data in a JWT payload.</div>
+
+    <h2>Standard claims</h2>
+    <table>
+      <tr><th>Claim</th><th>Meaning</th></tr>
+      <tr><td><code>iss</code></td><td>Issuer — who created the token</td></tr>
+      <tr><td><code>sub</code></td><td>Subject — usually the user ID</td></tr>
+      <tr><td><code>aud</code></td><td>Audience — who the token is for</td></tr>
+      <tr><td><code>exp</code></td><td>Expiration time (Unix seconds) — reject after this</td></tr>
+      <tr><td><code>nbf</code></td><td>Not before — reject earlier than this</td></tr>
+      <tr><td><code>iat</code></td><td>Issued at (Unix seconds)</td></tr>
+    </table>
+    <p class="muted">Times are Unix timestamps in <em>seconds</em> — convert them with the <a href="epoch.html">timestamp converter</a>.</p>
+
+    <h2>Signing vs. verifying</h2>
+    <p>The signature is what makes a JWT trustworthy. The issuer signs <code>header.payload</code> with a key; the receiver re-computes the signature and checks it matches.</p>
+    <h3>HS256 (symmetric)</h3>
+    <p>Signs and verifies with the <strong>same secret</strong> (HMAC-SHA256). Simple, but every party that verifies also holds the signing secret. Use a long, random secret.</p>
+    <h3>RS256 / ES256 (asymmetric)</h3>
+    <p>Signs with a <strong>private key</strong> and verifies with a <strong>public key</strong>. Better when many services need to verify but only one should issue — they only get the public key. Standard for OIDC / "sign in with…" flows.</p>
+
+    <h2>Decoding vs. verifying — don't confuse them</h2>
+    <p>Decoding just Base64URL-decodes the header and payload so you can read them. <strong>Verifying</strong> checks the signature against the key and confirms the token isn't expired or tampered with. Reading a token tells you what it claims; only verification tells you whether to trust it. A server must always verify; a developer inspecting a token just decodes it.</p>
+    <div class="tip">Paste a token into the <a href="jwt-decoder.html">JWT decoder</a> to read its header, payload, and expiry. It decodes <strong>entirely in your browser</strong> — the token is never sent anywhere, which matters because pasting a real token into a server-side online decoder leaks it.</div>
+
+    <h2>Common mistakes</h2>
+    <ul>
+      <li><strong>Trusting <code>alg: none</code>.</strong> Some libraries once accepted unsigned tokens. Always pin the expected algorithm.</li>
+      <li><strong>Not checking <code>exp</code>.</strong> Decoding without verifying expiry lets stale tokens through.</li>
+      <li><strong>Putting secrets in the payload.</strong> It's readable — treat it as public.</li>
+      <li><strong>Weak HS256 secrets.</strong> A short secret is brute-forceable; use 256+ bits of randomness.</li>
+      <li><strong>Long-lived tokens with no revocation.</strong> Keep <code>exp</code> short and use refresh tokens.</li>
+    </ul>
+
+    <a class="cta" href="jwt-decoder.html">Decode &amp; inspect a JWT →</a>
+
+    <footer>
+      Related: <a href="jwt-decoder.html">JWT decoder</a> &nbsp;·&nbsp; <a href="base64.html">Base64 encode/decode</a> &nbsp;·&nbsp; <a href="epoch.html">Unix timestamp converter</a> &nbsp;·&nbsp; <a href="tools.html">All developer tools</a><br>
+      Runs entirely in your browser. <a href="privacy.html">Privacy</a>
+    </footer>
+  </div>
+</body>
+</html>

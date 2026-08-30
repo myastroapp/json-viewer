@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSON Viewer &amp; Formatter Chrome Extension — Fast on Large Files</title>
+  <meta name="description" content="A private Chrome JSON viewer built for large files. Format the current tab on click, search every key and value, and keep data on your device." />
+  <link rel="canonical" href="https://myastroapp.github.io/json-viewer/chrome-extension.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JSON Viewer & Formatter for Chrome" />
+  <meta property="og:description" content="Open and search large JSON responses without freezing. Local, private, and permission-light." />
+  <meta property="og:url" content="https://myastroapp.github.io/json-viewer/chrome-extension.html" />
+  <meta property="og:image" content="https://myastroapp.github.io/json-viewer/og-default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    :root{--fg:#172033;--muted:#5f6b7a;--bg:#fff;--soft:#f4f7fb;--accent:#2563eb;--border:#d9e1ec}
+    @media(prefers-color-scheme:dark){:root{--fg:#e6edf7;--muted:#9eabc0;--bg:#0d1117;--soft:#151b25;--accent:#60a5fa;--border:#2c3544}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:980px;margin:auto;padding:0 22px}.site{padding:22px 0}.site a{color:var(--accent);font-weight:700;text-decoration:none}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center;padding:44px 0 54px}h1{font-size:44px;line-height:1.08;letter-spacing:-.03em;margin:0 0 18px}.lede{color:var(--muted);font-size:20px}.cta{display:inline-block;border-radius:10px;background:var(--accent);color:#fff;padding:12px 19px;text-decoration:none;font-weight:700}.cta[aria-disabled=true]{background:#7b8797;cursor:default}.note{display:block;color:var(--muted);font-size:14px;margin-top:10px}.shot{width:100%;border:1px solid var(--border);border-radius:14px;box-shadow:0 20px 50px #0002}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{border:1px solid var(--border);background:var(--soft);border-radius:12px;padding:20px}.card h2{font-size:18px;margin:0 0 7px}.card p{color:var(--muted);font-size:15px;margin:0}.trust{margin:46px 0;padding:24px;border-left:4px solid var(--accent);background:var(--soft)}footer{border-top:1px solid var(--border);margin-top:50px;padding:24px 0 48px;color:var(--muted);font-size:14px}footer a{color:var(--accent)}
+    @media(max-width:760px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr}h1{font-size:36px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site"><a href="./">{ } JSON Viewer</a></header>
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Large JSON, readable in one click.</h1>
+          <p class="lede">Format the current tab or open a private viewer. The tree renders incrementally, so large API responses stay responsive instead of building thousands of DOM nodes at once.</p>
+          <a id="install" class="cta" href="#" aria-disabled="true">Chrome Web Store review pending</a>
+          <span id="availability" class="note">The extension will become installable automatically after Google approves version 0.1.0.</span>
+        </div>
+        <img class="shot" src="screenshot.png" alt="JSON Viewer showing a collapsible, syntax-highlighted JSON tree" />
+      </section>
+      <section class="cards" aria-label="Benefits">
+        <article class="card"><h2>Fast on big payloads</h2><p>Lazy expansion and 200-item chunks keep the page responsive, including on 100,000-element test data.</p></article>
+        <article class="card"><h2>Private by design</h2><p>No analytics, accounts, background page reading, or data uploads. Processing stays in Chrome.</p></article>
+        <article class="card"><h2>Minimal access</h2><p>The extension reads only the active tab, and only after you click its toolbar icon.</p></article>
+      </section>
+      <section class="trust">
+        <strong>Prefer not to install anything?</strong> The <a href="app.html">web JSON viewer</a> remains free and works locally in your browser too.
+      </section>
+    </main>
+    <footer><a href="privacy.html">Privacy policy</a> · <a href="./">Web viewer</a> · <a href="tools.html">All developer tools</a></footer>
+  </div>
+  <script>
+    fetch("cws-status.json", {cache:"no-store"}).then(r=>r.json()).then(status=>{
+      if(status.status!=="live") return;
+      const install=document.getElementById("install");
+      install.href=status.storeUrl;
+      install.target="_blank";
+      install.rel="noopener";
+      install.removeAttribute("aria-disabled");
+      install.textContent="Add to Chrome — free →";
+      document.getElementById("availability").textContent="Free. No account, tracking, or data upload.";
+    }).catch(()=>{});
+  </script>
+  <script src="cws-cta.js" defer></script>
+</body>
+</html>

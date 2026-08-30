@@ -1,0 +1,33 @@
+name: Chrome Store launch monitor
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chrome-store-launch
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: store
+        name: Check public Chrome Web Store listing
+        run: node scripts/check-cws-status.mjs
+      - name: Publish install links after approval
+        if: steps.store.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cws-status.json README.md
+          git commit -m "Activate Chrome Web Store install links"
+          git push

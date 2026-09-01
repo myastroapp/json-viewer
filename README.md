@@ -5,7 +5,7 @@ A fast, private JSON viewer and formatter that stays smooth on **large files** â
 **â–¶ Use it: https://myastroapp.github.io/json-viewer/**
 
 <!-- CWS_STATUS_START -->
-**Chrome extension:** pending Chrome Web Store review. The install link will activate automatically after approval.
+**Chrome extension:** [Install JSON Viewer & Formatter from the Chrome Web Store](https://chromewebstore.google.com/detail/json-viewer-formatter-%E2%80%94-b/iflllkjiplfnggmmjikcgmjmbgchcgob)
 <!-- CWS_STATUS_END -->
 
 ![JSON Viewer screenshot](screenshot.png)

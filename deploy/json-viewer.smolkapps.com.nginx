@@ -1,0 +1,31 @@
+# Exact host for the JSON Viewer static site. This takes precedence over the
+# shared *.smolkapps.com proxy, which injects the legacy apps.smolkin.org canonical.
+server {
+  listen 80;
+  listen [::]:80;
+  server_name json-viewer.smolkapps.com;
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
+  server_name json-viewer.smolkapps.com;
+
+  ssl_certificate     /etc/letsencrypt/live/smolkapps-wild/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/smolkapps-wild/privkey.pem;
+  include /etc/letsencrypt/options-ssl-nginx.conf;
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+  root /var/www/apps/json-viewer;
+  index index.html;
+
+  add_header X-Content-Type-Options nosniff always;
+  add_header X-Frame-Options SAMEORIGIN always;
+  add_header Referrer-Policy strict-origin-when-cross-origin always;
+
+  location = /site.webmanifest { default_type application/manifest+json; }
+  location / { try_files $uri $uri/ =404; }
+
+  access_log /var/log/nginx/json-viewer-smolkapps.access.log;
+}

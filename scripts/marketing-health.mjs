@@ -8,8 +8,7 @@ const targets = [
   ["Status feed", "https://json-viewer.smolkapps.com/cws-status.json", "iflllkjiplfnggmmjikcgmjmbgchcgob"],
 ];
 
-const results = [];
-for (const [name, url, expected] of targets) {
+const results = await Promise.all(targets.map(async ([name, url, expected]) => {
   try {
     const response = await fetch(url, {
       redirect: "follow",
@@ -17,11 +16,11 @@ for (const [name, url, expected] of targets) {
       signal: AbortSignal.timeout(15_000),
     });
     const body = await response.text();
-    results.push({ name, url, ok: response.ok && body.includes(expected), status: response.status });
+    return { name, url, ok: response.ok && body.includes(expected), status: response.status };
   } catch (error) {
-    results.push({ name, url, ok: false, status: 0, error: error.message });
+    return { name, url, ok: false, status: 0, error: error.message };
   }
-}
+}));
 
 const lines = results.map((result) => `- ${result.ok ? "✅" : "❌"} ${result.name}: HTTP ${result.status} — ${result.url}`);
 console.log(lines.join("\n"));

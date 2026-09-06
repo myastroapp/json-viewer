@@ -2,10 +2,10 @@ import fs from "node:fs";
 import process from "node:process";
 
 const targets = [
-  ["Web viewer", "https://myastroapp.github.io/json-viewer/", "JSON viewer that doesn"],
-  ["Extension landing page", "https://myastroapp.github.io/json-viewer/chrome-extension.html", "Large JSON, readable"],
-  ["Privacy policy", "https://myastroapp.github.io/json-viewer/privacy.html", "Privacy Policy"],
-  ["Status feed", "https://myastroapp.github.io/json-viewer/cws-status.json", "iflllkjiplfnggmmjikcgmjmbgchcgob"],
+  ["Web viewer", "https://json-viewer.smolkapps.com/", "JSON viewer that doesn"],
+  ["Extension landing page", "https://json-viewer.smolkapps.com/chrome-extension.html", "Large JSON, readable"],
+  ["Privacy policy", "https://json-viewer.smolkapps.com/privacy.html", "Privacy Policy"],
+  ["Status feed", "https://json-viewer.smolkapps.com/cws-status.json", "iflllkjiplfnggmmjikcgmjmbgchcgob"],
 ];
 
 const results = [];

@@ -26,21 +26,26 @@ Use one post per community and answer replies. Do not cross-post the same copy e
 4. Day 7: publish a GitHub release and add the extension link to the repository description/homepage if it is not already visible.
 5. After real users exist: reply to reviews and fix uninstall-causing friction before adding more features. Do not manufacture ratings or ask friends for fake reviews.
 
-### Show HN copy
+### Show HN author checklist
 
-I built this after large API responses and log exports kept freezing the browser tools I tried. It renders the JSON tree lazily in 200-item chunks, so a 100,000-element document mounts only the nodes you can see. Search still walks the full data and opens the path to each match.
+Hacker News prohibits generated or AI-edited text. The owner must write the final title, submission,
+and comments personally. Use these verified facts as notes, not as copy to paste:
 
-The extension reads the active tab only after you click its toolbar icon. There are no host permissions, background page scraping, analytics, accounts, or uploads. You can also paste or open a local file in the standalone viewer.
+- Start the title with `Show HN:` and link to the directly usable viewer, not a signup or marketing page.
+- The tree renders lazily in 200-item chunks.
+- Search walks parsed data, including collapsed and not-yet-rendered nodes, expands matching paths,
+  highlights matches, and scrolls to the first result.
+- The extension uses `activeTab` only after a toolbar click and has no broad host permissions,
+  analytics, accounts, or uploads.
+- Explain the personal reason for building it and ask for feedback from people who inspect large API
+  responses or log exports.
+- Stay available to answer questions. Never solicit votes, comments, or coordinated submissions.
 
-Chrome Web Store: `<store URL>`
+### Other community posts
 
-The web version remains available here: https://myastroapp.github.io/json-viewer/
-
-I would especially value feedback from people who regularly inspect multi-megabyte API responses.
-
-### r/webdev Showoff copy
-
-I made a permission-light Chrome JSON viewer for large API responses and log exports. It renders the tree lazily in chunks, searches collapsed data, and processes everything locally. It only reads the current tab after you click the toolbar icon—no broad host access, analytics, or uploads. Free: `<store URL>`
+Write each post for the specific community and disclose that the poster built the extension. Do not
+cross-post identical text or manufacture engagement. Link to the free Chrome Web Store listing and,
+when a no-install demo is useful, https://json-viewer.smolkapps.com/app.html.
 
 ## Weekly review
 

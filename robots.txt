@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://myastroapp.github.io/json-viewer/sitemap.xml
+Sitemap: https://json-viewer.smolkapps.com/sitemap.xml

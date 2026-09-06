@@ -2,7 +2,7 @@
 
 A fast, private JSON viewer and formatter that stays smooth on **large files** — the ones that freeze your browser, DevTools, or the usual online formatters.
 
-**▶ Use it: https://myastroapp.github.io/json-viewer/**
+**▶ Use it: https://json-viewer.smolkapps.com/**
 
 <!-- CWS_STATUS_START -->
 **Chrome extension:** [Install JSON Viewer & Formatter from the Chrome Web Store](https://chromewebstore.google.com/detail/json-viewer-formatter-%E2%80%94-b/iflllkjiplfnggmmjikcgmjmbgchcgob)
@@ -14,9 +14,9 @@ A fast, private JSON viewer and formatter that stays smooth on **large files** �
 Most online JSON tools were built for small snippets. Paste a few megabytes of API response or a log export and they hang, crash the tab, or quietly upload your data to a server. This one renders large documents incrementally (the tree builds in chunks as you expand it) and keeps **everything in your browser** — nothing is uploaded. The source is right here, so that privacy claim is verifiable.
 
 ## Tools
-- **[JSON viewer](https://myastroapp.github.io/json-viewer/app.html)** — collapsible tree, instant search across keys and values, beautify/minify, built for big files.
-- **[JSON → CSV converter](https://myastroapp.github.io/json-viewer/json-to-csv.html)** — turn an array of objects into a clean CSV for Excel or Sheets.
-- **[JSONPath tester](https://myastroapp.github.io/json-viewer/jsonpath.html)** — evaluate paths like `data.items[*].name` against your JSON.
+- **[JSON viewer](https://json-viewer.smolkapps.com/app.html)** — collapsible tree, instant search across keys and values, beautify/minify, built for big files.
+- **[JSON → CSV converter](https://json-viewer.smolkapps.com/json-to-csv.html)** — turn an array of objects into a clean CSV for Excel or Sheets.
+- **[JSONPath tester](https://json-viewer.smolkapps.com/jsonpath.html)** — evaluate paths like `data.items[*].name` against your JSON.
 
 ## Privacy
 No accounts, no analytics, no tracking, no network requests of its own. Everything runs locally in your browser.

@@ -22,7 +22,10 @@ const results = await Promise.all(targets.map(async ([name, url, expected]) => {
   }
 }));
 
-const lines = results.map((result) => `- ${result.ok ? "✅" : "❌"} ${result.name}: HTTP ${result.status} — ${result.url}`);
+const lines = results.map((result) => {
+  const detail = result.error ? ` (${result.error})` : "";
+  return `- ${result.ok ? "✅" : "❌"} ${result.name}: HTTP ${result.status}${detail} — ${result.url}`;
+});
 console.log(lines.join("\n"));
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Marketing funnel health\n\n${lines.join("\n")}\n`);
 if (results.some((result) => !result.ok)) process.exit(1);

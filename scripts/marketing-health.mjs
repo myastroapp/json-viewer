@@ -11,7 +11,11 @@ const targets = [
 const results = [];
 for (const [name, url, expected] of targets) {
   try {
-    const response = await fetch(url, { redirect: "follow", headers: { "user-agent": "json-viewer-marketing-health/1.0" } });
+    const response = await fetch(url, {
+      redirect: "follow",
+      headers: { "user-agent": "json-viewer-marketing-health/1.0" },
+      signal: AbortSignal.timeout(15_000),
+    });
     const body = await response.text();
     results.push({ name, url, ok: response.ok && body.includes(expected), status: response.status });
   } catch (error) {

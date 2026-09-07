@@ -59,3 +59,16 @@ Record only verified figures from the Chrome Web Store dashboard:
 - changes shipped in response to actual feedback.
 
 Use install-to-uninstall behavior as the primary quality signal. Delay monetization inside the extension until retention exists and the publisher's trader declaration is corrected for paid functionality.
+
+The Chrome Web Store managed GA4 property is enabled. Its web stream uses measurement ID
+`G-C2T7BX56LE`; do not add that tag to the extension or the product website. Google owns the store
+listing page and sends the listing events. Website install links add these fixed UTM values:
+
+- `utm_source=json_viewer_web`
+- `utm_medium=referral`
+- `utm_campaign=extension_launch`
+- `utm_content=install_bar` or `extension_landing`
+
+Use separate, explicitly labeled CWS URLs for any campaign that links directly to the listing. Do
+not put personal data, email addresses, search terms, JSON content, or other user-provided values in
+UTM parameters. See `TELEMETRY.md` for the source-of-truth measurement contract.

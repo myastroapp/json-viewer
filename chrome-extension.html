@@ -49,7 +49,12 @@
     fetch("cws-status.json", {cache:"no-store"}).then(r=>r.json()).then(status=>{
       if(status.status!=="live") return;
       const install=document.getElementById("install");
-      install.href=status.storeUrl;
+      const storeUrl=new URL(status.storeUrl);
+      storeUrl.searchParams.set("utm_source","json_viewer_web");
+      storeUrl.searchParams.set("utm_medium","referral");
+      storeUrl.searchParams.set("utm_campaign","extension_launch");
+      storeUrl.searchParams.set("utm_content","extension_landing");
+      install.href=storeUrl.href;
       install.target="_blank";
       install.rel="noopener";
       install.removeAttribute("aria-disabled");

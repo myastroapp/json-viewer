@@ -2,13 +2,13 @@ import fs from "node:fs";
 import process from "node:process";
 
 const targets = [
-  ["Web viewer", "https://json-viewer.smolkapps.com/", "JSON viewer that doesn"],
-  ["Extension landing page", "https://json-viewer.smolkapps.com/chrome-extension.html", "Large JSON, readable"],
-  ["Privacy policy", "https://json-viewer.smolkapps.com/privacy.html", "Privacy Policy"],
+  ["Web viewer", "https://json-viewer.smolkapps.com/", "JSON viewer that doesn", "https://json-viewer.smolkapps.com/"],
+  ["Extension landing page", "https://json-viewer.smolkapps.com/chrome-extension.html", "Large JSON, readable", "https://json-viewer.smolkapps.com/chrome-extension.html"],
+  ["Privacy policy", "https://json-viewer.smolkapps.com/privacy.html", "Privacy Policy", "https://json-viewer.smolkapps.com/privacy.html"],
   ["Status feed", "https://json-viewer.smolkapps.com/cws-status.json", "iflllkjiplfnggmmjikcgmjmbgchcgob"],
 ];
 
-const results = await Promise.all(targets.map(async ([name, url, expected]) => {
+const results = await Promise.all(targets.map(async ([name, url, expected, canonical]) => {
   try {
     const response = await fetch(url, {
       redirect: "follow",
@@ -16,7 +16,10 @@ const results = await Promise.all(targets.map(async ([name, url, expected]) => {
       signal: AbortSignal.timeout(15_000),
     });
     const body = await response.text();
-    return { name, url, ok: response.ok && body.includes(expected), status: response.status };
+    const canonicals = [...body.matchAll(/<link\b[^>]*\brel="canonical"[^>]*\bhref="([^"]+)"/g)].map(match => match[1]);
+    const canonicalOk = !canonical || (canonicals.length === 1 && canonicals[0] === canonical);
+    return { name, url, ok: response.ok && body.includes(expected) && canonicalOk, status: response.status,
+      ...(!canonicalOk ? {error:"Missing or incorrect canonical URL"} : {}) };
   } catch (error) {
     return { name, url, ok: false, status: 0, error: error.message };
   }

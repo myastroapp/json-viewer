@@ -24,11 +24,13 @@
 <body>
   <header class="toolbar">
     <a class="brand" href="./" style="text-decoration:none">JSON Viewer</a>
+    <span class="privacy-badge" title="100% in-browser: all parsing runs locally on your device with zero server uploads">🔒 Private &amp; Offline</span>
     <button id="btn-new" title="Start over / paste new JSON">New</button>
     <button id="btn-open" title="Open a .json file">Open file</button>
     <button id="btn-format" title="Parse &amp; render what's in the input box">Format</button>
     <button id="btn-beautify" title="Copy pretty-printed JSON">Copy pretty</button>
     <button id="btn-minify" title="Copy minified JSON">Copy minified</button>
+    <button id="btn-ts" title="Copy TypeScript interfaces inferred from JSON">Copy TS</button>
     <button id="btn-expand" title="Expand all (small docs only)">Expand all</button>
     <button id="btn-collapse" title="Collapse to top level">Collapse</button>
     <span class="pro-group">
@@ -69,7 +71,7 @@
     </div>
   </div>
 
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=b6819921b9bd"></script>
   <script src="cws-cta.js" defer></script>
 </body>
 </html>

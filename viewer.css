@@ -30,6 +30,16 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, sans-serif;
 }
 .brand { color: var(--accent); margin-right: 4px; }
+.privacy-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 500; color: #0a7d33;
+  background: #dafbe1; border: 1px solid #4ac26b66;
+  padding: 2px 8px; border-radius: 12px; margin-right: 6px;
+  user-select: none; white-space: nowrap;
+}
+@media (prefers-color-scheme: dark) {
+  .privacy-badge { color: #7ee787; background: #04260f; border-color: #238636; }
+}
 .toolbar button {
   font: inherit; font-size: 12px; padding: 4px 9px; cursor: pointer;
   background: var(--bg); color: var(--fg);
@@ -72,6 +82,13 @@ kbd {
   white-space: pre-wrap; font-family: var(--mono);
 }
 @media (prefers-color-scheme: dark) { .error { background: #3d1412; color: #ff9492; } }
+.repair-btn {
+  display: inline-block; margin-top: 8px; font-family: system-ui, sans-serif;
+  font-size: 12px; font-weight: 600; padding: 5px 12px; cursor: pointer;
+  background: var(--bg); color: var(--accent); border: 1px solid var(--accent);
+  border-radius: 6px; transition: background 0.15s ease;
+}
+.repair-btn:hover { background: var(--row-hover); }
 
 .tree-mount { flex: 1; overflow: auto; padding: 8px 12px 40px; }
 

@@ -20,13 +20,8 @@
       const bar = document.createElement("aside");
       bar.className = "cws-install-bar";
       bar.setAttribute("aria-label", "Chrome extension");
-      bar.innerHTML = `<span>Open raw JSON from any tab with the free Chrome extension.</span><a rel="noopener" target="_blank">Add to Chrome →</a><button type="button" aria-label="Dismiss">×</button>`;
-      const storeUrl = new URL(status.storeUrl);
-      storeUrl.searchParams.set("utm_source", "json_viewer_web");
-      storeUrl.searchParams.set("utm_medium", "referral");
-      storeUrl.searchParams.set("utm_campaign", "extension_launch");
-      storeUrl.searchParams.set("utm_content", "install_bar");
-      bar.querySelector("a").href = storeUrl.href;
+      bar.innerHTML = `<span>Open raw JSON from any tab with the free Chrome extension.</span><a rel="noopener" target="_blank">Chrome extension details →</a><button type="button" aria-label="Dismiss">×</button>`;
+      bar.querySelector("a").href = new URL("chrome-extension.html", document.baseURI).href;
       bar.querySelector("button").addEventListener("click", () => {
         sessionStorage.setItem(DISMISSED_KEY, "1");
         bar.remove();

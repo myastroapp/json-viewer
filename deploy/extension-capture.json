@@ -1,0 +1,18 @@
+{
+  "captured_on": "2026-10-16",
+  "image": "extension-viewer.jpg",
+  "sha256": "875c2ee5529113b4214c5c87b84213d4b9a3f083d461901cac82ab541dad553d",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "source": "Original 0.1.0 extension viewer assets served in a local browser preview; not an installed-store capture. No interface modifications.",
+  "assets_sha256": {
+    "src/render.js": "3b44f7e221c9fc535fd6b38bac8933b8b30d8012554be49df8c589316d4f3ff0",
+    "src/viewer.css": "7e122e534371b57b5a5ffeaf0b1044b7f7ccca4709a6b5872a0191c9683de39e",
+    "src/viewer.html": "9864216cfc72324df8dfa4159a71c385fc981b398622e0492862c2cd79c4d1da",
+    "src/viewer.js": "04ff01e09ef776fb15ce0af0c8d94f22d69be75d7aef4ad92fbf5b0ba87b5632"
+  },
+  "content": "Disposable Product API fixture with two products; keyboard search expands its path and highlights Mechanical keyboard. No real customer data.",
+  "reused_for": "Website landing-page illustration only; normal viewer UI is unchanged in the prepared 0.1.1 update."
+}

@@ -14,3 +14,8 @@ the Chrome Web Store status feed, and the paid-flow browser test after every dep
 
 GitHub Pages remains a working legacy mirror. Its pages link and declare canonicals on the branded
 host so old bookmarks keep working without competing as the preferred search result.
+
+Keep the HTML's page-specific canonical and Open Graph URLs intact. Do not inject the homepage URL
+into every response: tools and guides have distinct content. `scripts/marketing-health.mjs` checks
+the homepage, extension landing page and privacy canonical URLs. Missing paths use `404.html` with
+an HTTP 404 response and a working link back to the viewer.
